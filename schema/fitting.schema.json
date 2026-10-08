@@ -107,6 +107,14 @@
         "ticket": {
           "$ref": "#/definitions/FittingTicket",
           "description": "Where the alterations were published, persisted by `recordTicket()`."
+        },
+        "pending": {
+          "$ref": "#/definitions/Pin",
+          "description": "A pin waiting on a clarification answer; not yet in `pins`."
+        },
+        "branch": {
+          "$ref": "#/definitions/FittingBranchRef",
+          "description": "The fitting branch, derived from the validated id."
         }
       },
       "required": [
@@ -184,6 +192,22 @@
         },
         "at": {
           "type": "string"
+        },
+        "withdrawnAt": {
+          "type": "string",
+          "description": "Set by `withdrawPin()`; the pin and its turns stay in the record."
+        },
+        "context": {
+          "$ref": "#/definitions/PinContext",
+          "description": "Forced by `stamp()`; never trusted from an agent."
+        },
+        "live": {
+          "type": "boolean",
+          "description": "Set from `liveness()`."
+        },
+        "notLiveReason": {
+          "type": "string",
+          "description": "Set from `liveness()`."
         }
       },
       "required": [
@@ -227,9 +251,31 @@
             ]
           },
           "else": {
-            "properties": {
-              "scope": {
-                "const": "frontend"
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "display-rule"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "scope": {
+                  "enum": [
+                    "frontend",
+                    "backend"
+                  ]
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "scope": {
+                  "const": "frontend"
+                }
               }
             }
           }
@@ -264,7 +310,7 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "Path within the host app's config surface, e.g. \"variantTable.columnOrder\"."
+          "description": "Dot path relative to the config document root, e.g. \"columnOrder\" or \"labels.status\". Arrays are replaced whole."
         },
         "before": {},
         "after": {},
@@ -327,6 +373,30 @@
       ],
       "additionalProperties": false
     },
+    "PinContext": {
+      "type": "object",
+      "properties": {
+        "route": {
+          "type": "string"
+        },
+        "persona": {
+          "type": "string"
+        },
+        "fixtures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "route",
+        "persona",
+        "fixtures"
+      ],
+      "additionalProperties": false,
+      "description": "Where and as whom the stakeholder was when the pin was made."
+    },
     "TranscriptTurn": {
       "type": "object",
       "properties": {
@@ -385,6 +455,10 @@
             },
             "notes": {
               "type": "string"
+            },
+            "fittingBranch": {
+              "$ref": "#/definitions/FittingBranchRef",
+              "description": "Branch an attempt created; `recordAttempt()` copies it onto `Fitting.branch`."
             }
           },
           "required": [
@@ -438,6 +512,10 @@
               "items": {
                 "type": "string"
               }
+            },
+            "fittingBranch": {
+              "$ref": "#/definitions/FittingBranchRef",
+              "description": "Branch an attempt created; `recordAttempt()` copies it onto `Fitting.branch`."
             }
           },
           "required": [
@@ -452,6 +530,30 @@
         }
       ],
       "description": "What the agent produced when it tried to implement the pins on the real repo."
+    },
+    "FittingBranchRef": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "base": {
+          "type": "string"
+        },
+        "worktree": {
+          "type": "string"
+        },
+        "dirty": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "base",
+        "worktree"
+      ],
+      "additionalProperties": false,
+      "description": "The git branch and worktree a fitting works on."
     },
     "FittingTicket": {
       "type": "object",
