@@ -1,0 +1,477 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/Fitting",
+  "definitions": {
+    "Fitting": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "muslinBuild": {
+          "type": "string",
+          "description": "Short identifier for the muslin build, e.g. a git SHA of main."
+        },
+        "app": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "screen": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "screen"
+          ],
+          "additionalProperties": false,
+          "description": "The host app this fitting ran against."
+        },
+        "fixtures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Which synthetic fixture(s) the stakeholder worked on."
+        },
+        "stakeholder": {
+          "type": "object",
+          "properties": {
+            "role": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "role"
+          ],
+          "additionalProperties": false
+        },
+        "facilitator": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false,
+          "description": "Who drove the session, if a developer was in the loop."
+        },
+        "startedAt": {
+          "type": "string"
+        },
+        "submittedAt": {
+          "type": "string"
+        },
+        "pins": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Pin"
+          }
+        },
+        "transcript": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TranscriptTurn"
+          },
+          "description": "Full transcript, in order."
+        },
+        "window": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "closesAt": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "closesAt"
+          ],
+          "additionalProperties": false,
+          "description": "Intake window this fitting belongs to."
+        },
+        "attempt": {
+          "$ref": "#/definitions/AttemptResult",
+          "description": "Latest attempt result, persisted by `recordAttempt()`. `draftAlterations()` falls back to it."
+        },
+        "ticket": {
+          "$ref": "#/definitions/FittingTicket",
+          "description": "Where the alterations were published, persisted by `recordTicket()`."
+        }
+      },
+      "required": [
+        "id",
+        "muslinBuild",
+        "app",
+        "fixtures",
+        "stakeholder",
+        "startedAt",
+        "pins",
+        "transcript"
+      ],
+      "additionalProperties": false
+    },
+    "Pin": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "utterance": {
+          "type": "string",
+          "description": "Stakeholder's words, verbatim, that produced this pin.",
+          "pattern": "\\S"
+        },
+        "kind": {
+          "$ref": "#/definitions/PinKind"
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope"
+        },
+        "summary": {
+          "type": "string",
+          "description": "Human-readable summary of what changed on the screen."
+        },
+        "configPatch": {
+          "$ref": "#/definitions/ConfigPatch",
+          "description": "Machine-readable change against the app's config surface, if expressible."
+        },
+        "impliedField": {
+          "$ref": "#/definitions/ImpliedField",
+          "description": "For data-gap pins: the field the stakeholder implied."
+        },
+        "clarifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Clarification"
+          },
+          "description": "Questions the agent asked and whether the stakeholder answered."
+        },
+        "revisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "utterance": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "at": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "utterance",
+              "summary",
+              "at"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Earlier versions of this pin, if the stakeholder refined it."
+        },
+        "at": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "utterance",
+        "kind",
+        "scope",
+        "summary",
+        "at"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "data-gap"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "scope": {
+                "const": "backend"
+              },
+              "impliedField": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "pattern": "\\S"
+                  }
+                }
+              }
+            },
+            "required": [
+              "impliedField"
+            ]
+          },
+          "else": {
+            "properties": {
+              "scope": {
+                "const": "frontend"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PinKind": {
+      "type": "string",
+      "enum": [
+        "layout",
+        "visibility",
+        "sort",
+        "filter",
+        "label",
+        "display-rule",
+        "density",
+        "data-gap"
+      ],
+      "description": "What kind of change a pin represents. Decides who can act on it."
+    },
+    "Scope": {
+      "type": "string",
+      "enum": [
+        "frontend",
+        "backend",
+        "design"
+      ],
+      "description": "Where the change has to happen."
+    },
+    "ConfigPatch": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path within the host app's config surface, e.g. \"variantTable.columnOrder\"."
+        },
+        "before": {},
+        "after": {},
+        "file": {
+          "type": "string",
+          "description": "Source file the patch targets, when known, e.g. \"src/features/variants/tableConfig.ts\"."
+        }
+      },
+      "required": [
+        "path",
+        "before",
+        "after"
+      ],
+      "additionalProperties": false
+    },
+    "ImpliedField": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Suggested property name, camelCase."
+        },
+        "typeHint": {
+          "type": "string",
+          "description": "The type the stakeholder's words imply, if any."
+        },
+        "onType": {
+          "type": "string",
+          "description": "Type or record the field would hang off, e.g. \"CaseVariant\"."
+        },
+        "possibleSources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Candidate systems of record, if the agent could guess."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "Clarification": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "decision": {
+          "type": "string",
+          "description": "Decision recorded from the answer, if one was reached."
+        }
+      },
+      "required": [
+        "question"
+      ],
+      "additionalProperties": false
+    },
+    "TranscriptTurn": {
+      "type": "object",
+      "properties": {
+        "who": {
+          "type": "string",
+          "enum": [
+            "stakeholder",
+            "agent",
+            "facilitator"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string"
+        },
+        "pinId": {
+          "type": "string",
+          "description": "Pin produced by this turn, if any."
+        }
+      },
+      "required": [
+        "who",
+        "text",
+        "at"
+      ],
+      "additionalProperties": false
+    },
+    "AttemptResult": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "outcome": {
+              "type": "string",
+              "const": "pr-opened"
+            },
+            "branch": {
+              "type": "string"
+            },
+            "prUrl": {
+              "type": "string"
+            },
+            "filesChanged": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "testsUpdated": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "outcome",
+            "branch",
+            "filesChanged",
+            "testsUpdated"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "outcome": {
+              "type": "string",
+              "const": "stopped"
+            },
+            "branch": {
+              "type": "string"
+            },
+            "appliedPinIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "blockedOn": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/ImpliedField"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "reason": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "reason"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "question": {
+              "type": "string"
+            },
+            "routeTo": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "outcome",
+            "branch",
+            "appliedPinIds",
+            "blockedOn",
+            "question",
+            "routeTo"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "description": "What the agent produced when it tried to implement the pins on the real repo."
+    },
+    "FittingTicket": {
+      "type": "object",
+      "properties": {
+        "tracker": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tracker",
+        "url"
+      ],
+      "additionalProperties": false,
+      "description": "A published ticket for a fitting, e.g. `{ tracker: \"github\", url, id }`."
+    }
+  }
+}

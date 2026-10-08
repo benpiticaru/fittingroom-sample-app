@@ -1,0 +1,64 @@
+/*
+ * Purpose: the sample app's only stylesheet. It exists so the muslin-only
+ *   placeholder column is visually legible as not-real (program goal G5).
+ * Responsibilities: the placeholder column's stripes and muted label, the
+ *   flagged-row treatment the config's displayRules drive, plus the minimum
+ *   table geometry those stripes need to read as a column band.
+ * Inputs/Outputs: none. Loaded once from src/main.tsx.
+ * Dependencies: none.
+ * Side Effects: ships in the production bundle. That is intentional and safe:
+ *   a .placeholder element is only ever rendered from a config that carries
+ *   placeholderColumns, which exists solely in tableConfig.muslin.json.
+ */
+
+/* Geometry only, so a striped cell reads as a band rather than bare text. */
+.jobs-table {
+  border-collapse: collapse;
+}
+
+.jobs-table th,
+.jobs-table td {
+  padding: 0.35rem 0.7rem;
+  text-align: left;
+}
+
+/*
+ * The muslin placeholder column. Diagonal stripes plus a muted, italic label:
+ * a stakeholder must never mistake "not in data today" for a real column that
+ * happens to be empty today.
+ */
+.jobs-table th.placeholder,
+.jobs-table td.placeholder {
+  color: #6b7280;
+  font-style: italic;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(107, 114, 128, 0.22) 0,
+    rgba(107, 114, 128, 0.22) 5px,
+    transparent 5px,
+    transparent 11px
+  );
+}
+
+.jobs-table th.placeholder {
+  font-weight: 400;
+}
+
+/*
+ * A row the config's `displayRules` flagged. This has to be visible: a
+ * stakeholder who says "flag the overdue ones" is pinning `displayRules`, and
+ * if a flagged row looks identical to every other row they conclude the muslin
+ * ignored them. The class alone is not the feature; the appearance is.
+ *
+ * These literals are placeholders for FR-19's generated brand tokens, which
+ * own the final palette. Deliberately not the brand's pin red, which FR-19
+ * reserves for the mark.
+ */
+.jobs-table tr.overdue {
+  background-color: #fdecea;
+}
+
+.jobs-table tr.overdue td {
+  color: #8a2318;
+  font-weight: 600;
+}

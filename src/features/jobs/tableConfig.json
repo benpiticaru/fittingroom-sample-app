@@ -1,0 +1,19 @@
+{
+  "columnOrder": ["reference", "status", "priority", "customerName", "openedYear", "technician", "slaHoursRemaining"],
+  "hiddenByDefault": ["openedYear"],
+  "defaultSort": { "field": "slaHoursRemaining", "direction": "asc" },
+  "defaultFilter": null,
+  "displayRules": [
+    { "field": "slaHoursRemaining", "when": "negative", "style": "overdue" }
+  ],
+  "labels": {
+    "reference": "Job",
+    "status": "Status",
+    "priority": "Priority",
+    "customerName": "Customer",
+    "technician": "Technician",
+    "slaHoursRemaining": "SLA (h)",
+    "openedYear": "Opened"
+  },
+  "density": "comfortable"
+}

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-muslin/
+*.tsbuildinfo
+**/.fitting-room/sessions/*
+!**/.fitting-room/sessions/example-*.json
+**/.fitting-room/sessions/*.local.json
+.fitting-room/baselines/

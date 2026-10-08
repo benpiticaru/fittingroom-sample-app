@@ -1,0 +1,39 @@
+{
+  "name": "fittingroom-sample-app",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "dev:muslin": "VITE_FITTINGROOM=1 vite",
+    "build": "vite build",
+    "build:muslin": "VITE_FITTINGROOM=1 vite build",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@fitting-room/adapter-msw": "file:vendor/fitting-room-adapter-msw-0.0.1.tgz",
+    "@fitting-room/agent": "file:vendor/fitting-room-agent-0.0.1.tgz",
+    "@fitting-room/cli": "file:vendor/fitting-room-cli-0.0.1.tgz",
+    "@fitting-room/core": "file:vendor/fitting-room-core-0.0.1.tgz",
+    "@fitting-room/fixtures": "file:vendor/fitting-room-fixtures-0.0.1.tgz",
+    "@fitting-room/panel": "file:vendor/fitting-room-panel-0.0.1.tgz",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "ajv": "^8.20.0",
+    "jsdom": "^25.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vite": "^5.4.0",
+    "vitest": "^2.1.0"
+  },
+  "overrides": {
+    "@fitting-room/adapter-msw": "$@fitting-room/adapter-msw",
+    "@fitting-room/agent": "$@fitting-room/agent",
+    "@fitting-room/cli": "$@fitting-room/cli",
+    "@fitting-room/core": "$@fitting-room/core",
+    "@fitting-room/fixtures": "$@fitting-room/fixtures",
+    "@fitting-room/panel": "$@fitting-room/panel"
+  }
+}

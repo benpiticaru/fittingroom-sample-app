@@ -1,0 +1,124 @@
+{
+  "visibleToRoles": [
+    "dispatcher"
+  ],
+  "meta": {
+    "edges": [
+      "overdue-sla",
+      "part-on-backorder",
+      "technician-double-booked",
+      "no-address"
+    ],
+    "note": "The jobs worklist endpoint.",
+    "synthetic": true
+  },
+  "data": {
+    "SYN-JOB-4120": {
+      "data": {
+        "reference": "SYN-JOB-4120",
+        "status": "blocked",
+        "priority": "high",
+        "customerName": "Harbour Lane Bakery",
+        "address": "17 Harbour Lane, Northgate",
+        "openedYear": 2026,
+        "slaHoursRemaining": -6,
+        "technician": {
+          "handle": "SYN-TECH-anders",
+          "displayName": "R. Andersen",
+          "concurrentJobs": 1
+        },
+        "parts": [
+          {
+            "sku": "SYN-PRT-0091",
+            "description": "Compressor relay",
+            "onBackorder": false
+          }
+        ]
+      },
+      "meta": {
+        "edges": [
+          "overdue-sla"
+        ],
+        "note": "Six hours past SLA and still blocked; the row a dispatcher argues about.",
+        "synthetic": true
+      }
+    },
+    "SYN-JOB-4121": {
+      "data": {
+        "reference": "SYN-JOB-4121",
+        "status": "scheduled",
+        "priority": "normal",
+        "customerName": "Pellworth Dental",
+        "address": "3 Mill Court, Eastbrook",
+        "openedYear": 2026,
+        "slaHoursRemaining": 22,
+        "technician": {
+          "handle": "SYN-TECH-boone",
+          "displayName": "T. Boone",
+          "concurrentJobs": 1
+        },
+        "parts": [
+          {
+            "sku": "SYN-PRT-0412",
+            "description": "Suction pump seal",
+            "onBackorder": true
+          },
+          {
+            "sku": "SYN-PRT-0413",
+            "description": "Filter cartridge",
+            "onBackorder": false
+          }
+        ]
+      },
+      "meta": {
+        "edges": [
+          "part-on-backorder"
+        ],
+        "note": "Cannot be completed on the first visit; the part is not coming.",
+        "synthetic": true
+      }
+    },
+    "SYN-JOB-4122": {
+      "data": {
+        "reference": "SYN-JOB-4122",
+        "status": "dispatched",
+        "priority": "high",
+        "customerName": "Vexley Cold Storage",
+        "address": "88 Depot Road, Westfell",
+        "openedYear": 2025,
+        "slaHoursRemaining": 4,
+        "technician": {
+          "handle": "SYN-TECH-okafor",
+          "displayName": "N. Okafor",
+          "concurrentJobs": 3
+        },
+        "parts": []
+      },
+      "meta": {
+        "edges": [
+          "technician-double-booked"
+        ],
+        "note": "Three concurrent jobs on one technician in the same window.",
+        "synthetic": true
+      }
+    },
+    "SYN-JOB-4123": {
+      "data": {
+        "reference": "SYN-JOB-4123",
+        "status": "scheduled",
+        "priority": "low",
+        "customerName": "Quillon Print Works",
+        "openedYear": 2026,
+        "slaHoursRemaining": 70,
+        "parts": []
+      },
+      "meta": {
+        "edges": [
+          "no-address"
+        ],
+        "note": "Raised from a phone call with no site address and no technician yet.",
+        "synthetic": true
+      }
+    }
+  }
+}

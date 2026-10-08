@@ -1,0 +1,12 @@
+{
+  "app": { "name": "sample-dispatch" },
+  "muslin": {
+    "buildFlag": "VITE_FITTINGROOM=1",
+    "fixtures": "src/fixtures",
+    "configSurface": "src/features/jobs/tableConfig.json",
+    "overlay": "src/features/jobs/tableConfig.muslin.json"
+  },
+  "window": { "open": false },
+  "agent": "facilitator",
+  "tracker": { "kind": "github-issues" }
+}

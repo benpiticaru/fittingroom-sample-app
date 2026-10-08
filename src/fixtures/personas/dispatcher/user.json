@@ -1,0 +1,14 @@
+{
+  "data": {
+    "role": "dispatcher",
+    "handle": "SYN-USER-dispatch",
+    "displayName": "Synthetic Dispatcher"
+  },
+  "meta": {
+    "edges": [
+      "default-persona"
+    ],
+    "note": "The one built-in persona for the beta.",
+    "synthetic": true
+  }
+}

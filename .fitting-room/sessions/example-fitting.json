@@ -1,0 +1,103 @@
+{
+  "id": "fit-muymp63u",
+  "muslinBuild": "unknown",
+  "app": {
+    "name": "sample-dispatch",
+    "screen": "Jobs worklist"
+  },
+  "fixtures": [
+    "SYN-JOB-4120",
+    "SYN-JOB-4121"
+  ],
+  "stakeholder": {
+    "role": "dispatch supervisor"
+  },
+  "startedAt": "2026-10-07T21:37:36.042Z",
+  "pins": [
+    {
+      "id": "pin-1",
+      "at": "2026-10-07T21:37:36.189Z",
+      "utterance": "Put the technician right after the status, that's who I look for first.",
+      "kind": "layout",
+      "scope": "frontend",
+      "summary": "Technician column moved next to Status",
+      "configPatch": {
+        "path": "columnOrder",
+        "before": [
+          "reference",
+          "status",
+          "priority",
+          "customerName",
+          "openedYear",
+          "technician",
+          "slaHoursRemaining"
+        ],
+        "after": [
+          "reference",
+          "status",
+          "technician",
+          "priority",
+          "customerName",
+          "openedYear",
+          "slaHoursRemaining"
+        ],
+        "file": "src/features/jobs/tableConfig.json"
+      }
+    },
+    {
+      "id": "pin-2",
+      "at": "2026-10-07T21:37:36.267Z",
+      "utterance": "Flag any job with a part on backorder so I can chase it.",
+      "kind": "display-rule",
+      "scope": "frontend",
+      "summary": "Jobs with a backordered part are flagged in the worklist"
+    },
+    {
+      "id": "pin-3",
+      "at": "2026-10-07T21:37:36.340Z",
+      "utterance": "Add a warranty status column",
+      "kind": "data-gap",
+      "scope": "backend",
+      "summary": "Warranty status column (not in data today)",
+      "impliedField": {
+        "name": "warrantyStatus"
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "who": "stakeholder",
+      "text": "Put the technician right after the status, that's who I look for first.",
+      "at": "2026-10-07T21:37:36.189Z",
+      "pinId": "pin-1"
+    },
+    {
+      "who": "stakeholder",
+      "text": "Flag any job with a part on backorder so I can chase it.",
+      "at": "2026-10-07T21:37:36.267Z",
+      "pinId": "pin-2"
+    },
+    {
+      "who": "stakeholder",
+      "text": "Add a warranty status column",
+      "at": "2026-10-07T21:37:36.340Z",
+      "pinId": "pin-3"
+    }
+  ],
+  "attempt": {
+    "outcome": "stopped",
+    "branch": "fitting/fit-muymp63u",
+    "appliedPinIds": [
+      "pin-1",
+      "pin-2"
+    ],
+    "blockedOn": {
+      "name": "warrantyStatus"
+    },
+    "question": "Where does warrantyStatus come from, and is it in scope?",
+    "routeTo": [
+      "backend lead",
+      "requesting stakeholder"
+    ]
+  }
+}
