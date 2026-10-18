@@ -3,16 +3,17 @@
 // Constraint B: the host app's production bundle is never modified by this
 // framework. The only honest way to assert that is to build it and read the
 // output. Builds into an mkdtemp dir, never examples/sample-app/dist.
-// (`build:muslin` writes to dist-muslin/ since FR-10; this test still builds
+// (`fit muslin build` writes to dist-muslin/ by default; this test still builds
 // into its own mkdtemp, so it never touches either directory.)
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, readdirSync, readFileSync, rmSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { tmpdir } from "node:os";
+import { tempDirs } from "@fitting-room/agent/testing";
 import { fileURLToPath } from "node:url";
 
 const appDir = fileURLToPath(new URL(".", import.meta.url));
+const temp = tempDirs();
 let outDir: string;
 let bundleText: string;
 /** The JS assets alone. Used where an assertion must be about the SCRIPT. */
@@ -31,7 +32,7 @@ function listFilesRecursively(dir: string): string[] {
 }
 
 beforeAll(() => {
-  outDir = mkdtempSync(join(tmpdir(), "fittingroom-bundle-"));
+  outDir = temp.makeSync("fittingroom-bundle-");
   execFileSync("npx", ["vite", "build", "--outDir", outDir, "--emptyOutDir", "--logLevel", "error"], {
     cwd: appDir,
     stdio: "pipe",
@@ -40,7 +41,7 @@ beforeAll(() => {
     // test carries jsxDEV plus absolute source paths, i.e. it is not the
     // artifact that actually ships and Constraint B would be asserted against
     // the wrong build.
-    env: { ...process.env, NODE_ENV: "production", VITE_FITTINGROOM: "0" },
+    env: { ...process.env, NODE_ENV: "production" },
   });
   assetNames = readdirSync(join(outDir, "assets"));
   // Read EVERY built text file, not just the JS. A stylesheet, the HTML shell
@@ -56,10 +57,10 @@ beforeAll(() => {
 }, 120_000);
 
 afterAll(() => {
-  if (outDir) rmSync(outDir, { recursive: true, force: true });
+  temp.cleanupSync();
 });
 
-describe("production bundle (flag off)", () => {
+describe("production bundle", () => {
   it("produces at least one JS asset, so the assertions below are not vacuous", () => {
     expect(assetNames.filter((f) => f.endsWith(".js")).length).toBeGreaterThan(0);
     expect(bundleText.length).toBeGreaterThan(1000);
@@ -102,6 +103,25 @@ describe("production bundle (flag off)", () => {
     expect(bundleText).not.toContain("fittingroom-panel");
   });
 
+  // FR-79: the muslin is built by `fit muslin build` through build-time aliases, so the production
+  // build must carry none of the descriptor publish, the panel boot module or the host event.
+  it.each(["__fittingRoom", "fittingroom:host", "muslin-boot", "fitting-room:muslin-boot"])("contains no descriptor or boot token %s", (token) => {
+    expect(bundleText).not.toContain(token);
+  });
+
+  // FR-144: the gap layer (example values, its storage key, the store that reads it) is muslin-only.
+  // The seam is aliased by `fit muslin build`, so none of it may reach the production build.
+  it.each(["[example]", "fitting-room:gaps", "createGapStore", "withGaps"])("contains no gap token %s", (token) => {
+    expect(bundleText).not.toContain(token);
+  });
+
+  it.each(['"source":"generated"', '"source": "generated"', "generation.json", "entities.json", ".fitting-room/data", "review.md"])(
+    "contains no generated-data file or marker %s",
+    (token) => {
+      expect(bundleText).not.toContain(token);
+    },
+  );
+
   it("contains no persona user fixture", () => {
     expect(bundleText).not.toContain("SYN-USER-");
   });
@@ -120,6 +140,7 @@ describe("production bundle (flag off)", () => {
     // string in its <title>, so checking the whole scanned corpus would pass
     // even if the component tree never made it into the bundle.
     expect(jsText).toContain("Dispatch worklist");
+    expect(jsText).toContain("jobs failed:"); // positive control: the real API client text is in the production JS
   });
 
   it("is a real production build, not Vitest's inherited NODE_ENV=test build", () => {

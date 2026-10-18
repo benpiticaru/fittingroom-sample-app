@@ -1,0 +1,207 @@
+{
+  "id": "fit-01a13fede70ada0e",
+  "muslinBuild": "unknown",
+  "app": {
+    "name": "sample-dispatch",
+    "screen": "jobs"
+  },
+  "fixtures": [
+    "jobs"
+  ],
+  "stakeholder": {
+    "role": "dispatcher"
+  },
+  "startedAt": "2026-10-15T14:18:38.218Z",
+  "pins": [
+    {
+      "id": "pin-1",
+      "utterance": "Put the technician right after the status, that's who I look for first.",
+      "kind": "layout",
+      "scope": "frontend",
+      "summary": "Move technician column to position after status",
+      "at": "2026-10-15T14:18:38.361Z",
+      "configPatch": {
+        "path": "columnOrder",
+        "before": [
+          "reference",
+          "status",
+          "priority",
+          "customerName",
+          "openedYear",
+          "technician",
+          "slaHoursRemaining"
+        ],
+        "after": [
+          "reference",
+          "status",
+          "technician",
+          "priority",
+          "customerName",
+          "openedYear",
+          "slaHoursRemaining"
+        ],
+        "file": "src/features/jobs/tableConfig.json"
+      },
+      "context": {
+        "route": "/",
+        "persona": "dispatcher",
+        "fixtures": [
+          "jobs"
+        ]
+      },
+      "live": true,
+      "withdrawnAt": "2026-10-15T14:20:29.052Z"
+    },
+    {
+      "id": "pin-2",
+      "utterance": "Flag any job with a part on backorder so I can chase it.",
+      "kind": "display-rule",
+      "scope": "frontend",
+      "summary": "Flag jobs where any part is on backorder",
+      "at": "2026-10-15T14:18:41.092Z",
+      "context": {
+        "route": "/",
+        "persona": "dispatcher",
+        "fixtures": [
+          "jobs"
+        ]
+      },
+      "live": true,
+      "liveEdit": {
+        "status": "kept",
+        "commit": "091cb8054f98c9ca5d2062d621e11f4128b3f6c0",
+        "paths": [
+          "src/features/jobs/JobsTable.tsx",
+          "src/index.css"
+        ],
+        "ms": 39876
+      }
+    },
+    {
+      "id": "pin-3",
+      "utterance": "A badge on the row is enough.",
+      "kind": "display-rule",
+      "scope": "frontend",
+      "summary": "Backorder flag should appear as a badge on the row, not a column indicator",
+      "at": "2026-10-15T14:19:23.969Z",
+      "context": {
+        "route": "/",
+        "persona": "dispatcher",
+        "fixtures": [
+          "jobs"
+        ]
+      },
+      "live": false,
+      "notLiveReason": "needs code",
+      "liveEdit": {
+        "status": "not-kept",
+        "reason": "no-change",
+        "ms": 9843
+      }
+    },
+    {
+      "id": "pin-4",
+      "utterance": "Add a last visit date column",
+      "kind": "data-gap",
+      "scope": "backend",
+      "summary": "Add last visit date field to display when each job was last visited",
+      "at": "2026-10-15T14:19:36.655Z",
+      "impliedField": {
+        "name": "lastVisitDate",
+        "typeHint": "date"
+      },
+      "context": {
+        "route": "/",
+        "persona": "dispatcher",
+        "fixtures": [
+          "jobs"
+        ]
+      },
+      "live": true
+    },
+    {
+      "id": "pin-5",
+      "utterance": "add interactive sort functionality to each column",
+      "kind": "sort",
+      "scope": "frontend",
+      "summary": "Enable interactive sorting on all columns",
+      "at": "2026-10-15T14:19:39.050Z",
+      "context": {
+        "route": "/",
+        "persona": "dispatcher",
+        "fixtures": [
+          "jobs"
+        ]
+      },
+      "live": true,
+      "liveEdit": {
+        "status": "kept",
+        "commit": "afbd66c3ca3ea3e82fada45875dfb065e9bf7257",
+        "paths": [
+          "src/features/jobs/JobsTable.tsx",
+          "src/index.css"
+        ],
+        "ms": 47258
+      }
+    }
+  ],
+  "transcript": [
+    {
+      "who": "stakeholder",
+      "text": "Put the technician right after the status, that's who I look for first.",
+      "at": "2026-10-15T14:18:38.361Z",
+      "pinId": "pin-1"
+    },
+    {
+      "who": "stakeholder",
+      "text": "Flag any job with a part on backorder so I can chase it.",
+      "at": "2026-10-15T14:18:41.092Z",
+      "pinId": "pin-2"
+    },
+    {
+      "who": "stakeholder",
+      "text": "A badge on the row is enough.",
+      "at": "2026-10-15T14:19:23.969Z",
+      "pinId": "pin-3"
+    },
+    {
+      "who": "stakeholder",
+      "text": "Add a last visit date column",
+      "at": "2026-10-15T14:19:36.655Z",
+      "pinId": "pin-4"
+    },
+    {
+      "who": "stakeholder",
+      "text": "add interactive sort functionality to each column",
+      "at": "2026-10-15T14:19:39.050Z",
+      "pinId": "pin-5"
+    }
+  ],
+  "branch": {
+    "name": "fitting/fit-01a13fede70ada0e",
+    "base": "main",
+    "worktree": ".worktrees/fitting-fit-01a13fede70ada0e"
+  },
+  "submittedAt": "2026-10-15T14:20:29.231Z",
+  "attempt": {
+    "outcome": "stopped",
+    "branch": "fitting/fit-01a13fede70ada0e",
+    "appliedPinIds": [
+      "pin-2",
+      "pin-5"
+    ],
+    "blockedOn": {
+      "name": "lastVisitDate",
+      "typeHint": "date"
+    },
+    "question": "Where does lastVisitDate come from, and is it in scope?",
+    "routeTo": [
+      "backend lead",
+      "requesting stakeholder"
+    ],
+    "blockedPinIds": [
+      "pin-4",
+      "pin-3"
+    ]
+  }
+}

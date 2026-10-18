@@ -1,0 +1,87 @@
+{
+  "visibleToRoles": [
+    "planner"
+  ],
+  "meta": {
+    "edges": [
+      "empty:parts",
+      "enum:priority=low",
+      "enum:priority=normal",
+      "enum:status=dispatched",
+      "enum:status=scheduled",
+      "nullable:address"
+    ],
+    "synthetic": true,
+    "source": "generated"
+  },
+  "data": {
+    "SYN-JOB-1": {
+      "data": {
+        "address": "SYN Street 1",
+        "customerName": "Juniper SYN-Slate",
+        "openedYear": 2025,
+        "parts": [],
+        "priority": "low",
+        "reference": "SYN-JOB-1",
+        "slaHoursRemaining": 13,
+        "status": "scheduled",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Pebble SYN-Reed",
+          "handle": "SYN-HANDLE-1"
+        }
+      },
+      "meta": {
+        "edges": [
+          "empty:parts",
+          "enum:priority=low",
+          "enum:status=scheduled"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-2": {
+      "data": {
+        "address": null,
+        "customerName": "Dune SYN-Tallow",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Replacement air filter, 20 inch",
+            "onBackorder": false,
+            "sku": "FLT-AIR-20"
+          },
+          {
+            "description": "Condensate drain pump",
+            "onBackorder": false,
+            "sku": "PMP-DRN-01"
+          },
+          {
+            "description": "Run capacitor, 35/5 uF",
+            "onBackorder": false,
+            "sku": "CAP-RUN-35"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-2",
+        "slaHoursRemaining": 11,
+        "status": "dispatched",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Garnet SYN-Fold",
+          "handle": "SYN-HANDLE-2"
+        }
+      },
+      "meta": {
+        "edges": [
+          "nullable:address",
+          "enum:priority=normal",
+          "enum:status=dispatched"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    }
+  }
+}

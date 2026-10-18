@@ -1,0 +1,178 @@
+{
+  "ticket": "FR-104",
+  "recordedOn": "2026-10-14",
+  "site": "export",
+  "load": {
+    "gate": "waived by the owner on 2026-10-14",
+    "note": "Taken under a 1-minute load average of about 18 to 22 from unrelated work on the same machine (other lanes and a Docker VM), not from Fitting Room. The numbers overstate the product's time; the owner's demo dry run re-times them on a quieter machine."
+  },
+  "environment": {
+    "os": "macOS 27.0.1",
+    "node": "v22.23.1",
+    "claudeCode": "2.1.299",
+    "vite": "5.4.21",
+    "agent": "git",
+    "cpus": 18
+  },
+  "install": {
+    "name": "install (npm ci in the fitting worktree, from the fitting's start reply to the end of its output)",
+    "seconds": 2.6,
+    "load1": 22.12,
+    "load1End": 22.11
+  },
+  "promotion": {
+    "name": "promotion (end of install to Vite ready)",
+    "seconds": 0.8,
+    "load1": 22.11,
+    "load1End": 22.11
+  },
+  "pins": [
+    {
+      "utterance": "add sort functionality to each column",
+      "pinId": "pin-1",
+      "status": "kept",
+      "seconds": 76.6,
+      "load1": 22.12,
+      "load1End": 18.61,
+      "target": "4 minutes (first change)",
+      "met": true,
+      "phases": [
+        {
+          "name": "starting (install wait and promotion, to editing)",
+          "seconds": 7.8,
+          "load1": 22.12,
+          "load1End": 21.63
+        },
+        {
+          "name": "editing",
+          "seconds": 61.0,
+          "load1": 21.63,
+          "load1End": 18.12
+        },
+        {
+          "name": "checking",
+          "seconds": 7.6,
+          "load1": 18.12,
+          "load1End": 18.66
+        },
+        {
+          "name": "keeping",
+          "seconds": 0.3,
+          "load1": 18.66,
+          "load1End": 18.66
+        }
+      ],
+      "paths": [
+        "src/features/jobs/JobsTable.tsx +54 -6",
+        "src/index.css +32 -1"
+      ]
+    },
+    {
+      "utterance": "make the table headers sticky",
+      "pinId": "pin-2",
+      "status": "kept",
+      "seconds": 30.0,
+      "load1": 17.67,
+      "load1End": 19.17,
+      "target": "3 minutes (later)",
+      "met": true,
+      "phases": [
+        {
+          "name": "promoting",
+          "seconds": 0.3,
+          "load1": 17.67,
+          "load1End": 17.67
+        },
+        {
+          "name": "editing",
+          "seconds": 21.1,
+          "load1": 17.67,
+          "load1End": 18.22
+        },
+        {
+          "name": "checking",
+          "seconds": 7.9,
+          "load1": 18.22,
+          "load1End": 19.17
+        },
+        {
+          "name": "keeping",
+          "seconds": 0.6,
+          "load1": 19.17,
+          "load1End": 19.17
+        }
+      ]
+    }
+  ],
+  "earlierAttempts": [],
+  "back": {
+    "pinIds": [
+      "pin-1",
+      "pin-2"
+    ],
+    "outcome": "revert-conflict (409, later: pin-2) in 0.7 s at load 19.16, then cascade (200) in 1.5 s at load 19.47 to 19.35: pin-2 and pin-1 reverted, code files equal to main",
+    "seconds": 1.5,
+    "load1": 19.47,
+    "load1End": 19.35
+  },
+  "forwarding": {
+    "staticBeforePromotion": true,
+    "htmlFromDevServer": true,
+    "tokenMeta": true,
+    "hmrConnected": true,
+    "hmrUpdateDuringEdit": true,
+    "editedSourceServed": true,
+    "revertedSourceServed": true
+  },
+  "commits": [
+    "pin-1: add sort functionality to each column",
+    "code pin-1: add sort functionality to each column",
+    "record: live edit",
+    "pin-2: make the table headers sticky",
+    "code pin-2: make the table headers sticky",
+    "record: live edit",
+    "revert pin-2: make the table headers sticky",
+    "revert pin-1: add sort functionality to each column"
+  ],
+  "liveLines": [
+    "Fitting Room: http://127.0.0.1:4400 (agent git, base main)",
+    "live edit: available (Claude Code 2.1.299); a request that needs code is changed in the fitting worktree and kept only if the host's check passes",
+    "privacy: live edit is on: the stakeholder's words for each request that needs code, and the host source files the coding agent reads, go to the coding agent (Claude Code, under the facilitator's own login); its replies are written as turn files under .fitting-room/sessions/<id>/turns/ and pushed with the fitting branch",
+    "[live] added 178 packages, and audited 179 packages in 2s",
+    "[live] 31 packages are looking for funding",
+    "[live]   run `npm fund` for details",
+    "[live] 6 vulnerabilities (3 moderate, 1 high, 2 critical)",
+    "[live] To address all issues (including breaking changes), run:",
+    "[live]   npm audit fix --force",
+    "[live] Run `npm audit` for details.",
+    "[live] npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation",
+    "[live] ",
+    "[live] > dev:muslin",
+    "[live] > VITE_FITTINGROOM=1 vite --host 127.0.0.1 --port 63332 --strictPort",
+    "[live] ",
+    "[live] The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.",
+    "[live] ",
+    "[live]   VITE v5.4.21  ready in 390 ms",
+    "[live] ",
+    "[live]   ➜  Local:   http://127.0.0.1:63332/",
+    "[live] 11:55:47 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:55:52 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:55:54 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:55:56 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:55:58 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:55:59 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:56:05 AM [vite] hmr update /src/index.css",
+    "[live] 11:56:10 AM [vite] hmr update /src/index.css",
+    "[live] 11:56:15 AM [vite] hmr update /src/index.css",
+    "[live] 11:56:50 AM [vite] page reload src/features/jobs/tableConfig.json",
+    "[live] 11:57:04 AM [vite] hmr update /src/index.css",
+    "[live] 11:57:07 AM [vite] hmr update /src/index.css",
+    "[live] 11:57:26 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:57:26 AM [vite] hmr update /src/index.css",
+    "[live] 11:57:26 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:57:26 AM [vite] hmr update /src/index.css",
+    "[live] 11:57:33 AM [vite] hmr update /src/index.css",
+    "[live] 11:57:34 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 11:57:34 AM [vite] hmr update /src/index.css"
+  ]
+}

@@ -1,8 +1,11 @@
 node_modules/
 dist/
 dist-muslin/
+.fitting-room/undressed.json
+.worktrees/
 *.tsbuildinfo
 **/.fitting-room/sessions/*
+**/.fitting-room/undressed.json
 !**/.fitting-room/sessions/example-*.json
 **/.fitting-room/sessions/*.local.json
 .fitting-room/baselines/

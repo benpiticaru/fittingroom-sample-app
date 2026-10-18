@@ -31,25 +31,33 @@ export function JobsTable({ jobs, onSelect }: { jobs: Job[]; onSelect: (job: Job
   const placeholders = config.placeholderColumns ?? [];
 
   return (
-    <table className={`jobs-table ${config.density}`}>
+    <table className={`jobs-table ${config.density}`} data-testid="jobs-table">
       <thead>
         <tr>
           {columns.map((c) => (
-            <th key={c} scope="col">{config.labels[c] ?? c}</th>
+            <th key={c} scope="col" data-column-key={c}>{config.labels[c] ?? c}</th>
           ))}
           {placeholders.map((p) => (
-            <th key={p.name} scope="col" className="placeholder">{p.label}</th>
+            <th key={p.name} scope="col" className="placeholder" data-column-key={p.name}>{p.label}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {jobs.map((job) => (
+        {jobs.map((job, i) => (
           <tr key={job.reference} className={rowClass(job, config)} onClick={() => onSelect(job)}>
             {columns.map((c) => (
               <td key={c}>{cellValue(job, c)}</td>
             ))}
             {placeholders.map((p) => (
-              <td key={p.name} className="placeholder">{EM_DASH}</td>
+              <td key={p.name} className="placeholder">
+                {p.sample?.length ? (
+                  <>
+                    <em>{p.sample[i % p.sample.length]}</em> <span className="example-tag">example</span>
+                  </>
+                ) : (
+                  EM_DASH
+                )}
+              </td>
             ))}
           </tr>
         ))}

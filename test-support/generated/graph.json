@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "entities": {
+    "job": {
+      "endpoint": "jobs",
+      "key": "reference",
+      "fields": {
+        "reference": "string", "status": "enum", "phoneType": "enum", "customerName": "string", "notes": "string",
+        "address": "string", "postcode": "string", "city": "string", "contactDob": "string",
+        "technician.handle": "string", "technician.displayName": "string",
+        "parts": "array", "parts[].sku": "string", "parts[].serialNumber": "string", "parts[].onBackorder": "boolean"
+      }
+    },
+    "technician": { "endpoint": "technicians", "key": "handle", "fields": { "handle": "string", "displayName": "string" } }
+  },
+  "references": [{ "from": "job.technician.handle", "to": "technician" }]
+}

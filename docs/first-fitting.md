@@ -1,6 +1,6 @@
 # Your first fitting
 
-A fitting is a stakeholder trying on the real screen before anything is built (see the [glossary](glossary.md)). This walkthrough runs one on the sample app, end to end, with the facilitator agent. No model is configured and nothing touches the network until the last, manual step. `examples/sample-app/replay.test.ts` replays every `fit` and `json muslin-edit` fenced block below, so this doc cannot drift from the code.
+A fitting is a stakeholder trying on the real screen before anything is built (see the [glossary](glossary.md)). This walkthrough runs one on the sample app, end to end, with the facilitator agent. No model is configured and nothing touches the network until the last, manual step. `examples/sample-app/first-fitting.replay.test.ts` replays every `fit` and `json muslin-edit` fenced block below, so this doc cannot drift from the code.
 
 ## Setup
 
@@ -16,8 +16,10 @@ npm run dev:muslin               # optional, in a second terminal: watch the mus
 ## 1. Start the fitting
 
 ```fit
-fit fitting start --allow-self-host --role "dispatch supervisor" --screen "Jobs worklist" --fixture SYN-JOB-4120 --fixture SYN-JOB-4121
+fit fitting start --allow-self-host --no-branch --role "dispatch supervisor" --screen "Jobs worklist" --fixture SYN-JOB-4120 --fixture SYN-JOB-4121
 ```
+
+This walkthrough keeps everything local, so it passes `--no-branch`; `fit serve` and the beta walkthrough use a fitting branch.
 
 `--allow-self-host` is needed only because this walkthrough runs inside the Fitting Room monorepo; in a real host, or the standalone sample-app repo (`node scripts/export-sample-app.mjs`), leave it off.
 
@@ -25,7 +27,7 @@ fit fitting start --allow-self-host --role "dispatch supervisor" --screen "Jobs 
 FITTING=$(ls -t .fitting-room/sessions/fit-*.json | head -1)
 ```
 
-`fitting start` snapshotted the config surface as the baseline every `--patch` diffs against.
+`fitting start` snapshotted the config surface and the muslin overlay as they were at start. That baseline is what every `--patch` diffs against.
 
 ## 2. Pin a layout change
 
@@ -51,7 +53,7 @@ fit pin "$FITTING" "Flag any job with a part on backorder so I can chase it." --
 
 ## 4. Pin a data gap
 
-The sample data has no warranty field. The facilitator classifies the request as `data-gap` with scope `backend` and `impliedField: warrantyStatus`. The striped "not in data today" column in the muslin is that same field from `tableConfig.muslin.json`. It is never added to `tableConfig.json`.
+The sample data has no warranty field. The facilitator classifies the request as `data-gap` with scope `backend` and `impliedField: warrantyStatus`. The striped "not in data today" column in the muslin is derived from the session (the baseline overlay plus the active data-gap pins). `fit pin` does not write `tableConfig.muslin.json`, and the field is never added to `tableConfig.json`.
 
 ```fit
 fit pin "$FITTING" "Add a warranty status column" --summary "Warranty status column (not in data today)"
@@ -67,7 +69,7 @@ fit attempt "$FITTING"
 
 ## 6. Submit
 
-This prints the alterations ticket: the verbatim words, the config diff with `before` values, three acceptance criteria, the data gap flagged `backend`, and `## Triage`.
+This prints the alterations ticket: the verbatim words, the config diff with `before` values, three acceptance criteria, the data gap flagged `backend`, and `## Triage`. It also writes the same ticket, with YAML front matter, to `docs/specs/drafts/<fitting-id>.md` (the pre-spec) and names that path on stderr.
 
 ```fit
 fit submit "$FITTING"
@@ -86,7 +88,7 @@ The issue URL is recorded as `ticket` in the session; republishing is refused.
 ## Clean up
 
 ```sh
-git restore src/features/jobs/tableConfig.json src/features/jobs/tableConfig.muslin.json
+git restore src/features/jobs/tableConfig.json
 ```
 
-The walkthrough edited the real config surface in your working copy, and the data-gap pin rewrote the muslin overlay (same entry, `fit`'s JSON formatting). The pins are the record, so restore both files.
+The walkthrough edited the real config surface in your working copy. The pins are the record, so restore that file.

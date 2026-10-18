@@ -1,0 +1,14 @@
+{
+  "data": {
+    "role": "supervisor",
+    "handle": "SYN-USER-1",
+    "displayName": "Linden SYN-Pike"
+  },
+  "meta": {
+    "edges": [
+      "generated"
+    ],
+    "synthetic": true,
+    "source": "generated"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "entities": {
+    "job": {
+      "endpoint": "jobs",
+      "key": "reference",
+      "fields": {
+        "reference": "string",
+        "status": "enum",
+        "priority": "enum",
+        "customerName": "string",
+        "address": "string",
+        "openedYear": "number",
+        "slaHoursRemaining": "number",
+        "technician.handle": "string",
+        "technician.displayName": "string",
+        "technician.concurrentJobs": "number",
+        "parts": "array",
+        "parts[].sku": "string",
+        "parts[].description": "string",
+        "parts[].onBackorder": "boolean"
+      }
+    }
+  },
+  "references": []
+}

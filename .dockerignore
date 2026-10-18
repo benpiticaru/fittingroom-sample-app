@@ -1,0 +1,10 @@
+.env
+.env.*
+.fitting-room/sessions
+.fitting-room/baselines
+**/*.local.json
+node_modules
+dist
+dist-muslin
+.git
+.worktrees

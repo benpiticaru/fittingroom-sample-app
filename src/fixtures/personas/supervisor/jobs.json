@@ -1,0 +1,872 @@
+{
+  "visibleToRoles": [
+    "supervisor"
+  ],
+  "meta": {
+    "edges": [
+      "empty:parts",
+      "enum:priority=high",
+      "enum:priority=low",
+      "enum:priority=normal",
+      "enum:status=blocked",
+      "enum:status=complete",
+      "enum:status=dispatched",
+      "enum:status=on-site",
+      "enum:status=scheduled",
+      "nullable:address"
+    ],
+    "synthetic": true,
+    "source": "generated"
+  },
+  "data": {
+    "SYN-JOB-1": {
+      "data": {
+        "address": "SYN Street 1",
+        "customerName": "Heath SYN-Bramble",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Condenser fan motor",
+            "onBackorder": true,
+            "sku": "FAN-2201"
+          },
+          {
+            "description": "Run capacitor 45/5 uF",
+            "onBackorder": true,
+            "sku": "CAP-4505"
+          },
+          {
+            "description": "Contactor 2-pole 24V",
+            "onBackorder": true,
+            "sku": "CON-2024"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-1",
+        "slaHoursRemaining": 4,
+        "status": "scheduled",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Garnet SYN-Fold",
+          "handle": "SYN-HANDLE-1"
+        }
+      },
+      "meta": {
+        "edges": [
+          "enum:priority=low",
+          "enum:status=scheduled"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-2": {
+      "data": {
+        "address": null,
+        "customerName": "Linden SYN-Pike",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Thermostat wall unit",
+            "onBackorder": false,
+            "sku": "THM-1100"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-2",
+        "slaHoursRemaining": 12,
+        "status": "dispatched",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Heath SYN-Bramble",
+          "handle": "SYN-HANDLE-2"
+        }
+      },
+      "meta": {
+        "edges": [
+          "nullable:address",
+          "enum:priority=normal",
+          "enum:status=dispatched"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-3": {
+      "data": {
+        "address": "SYN Street 2",
+        "customerName": "Cedar SYN-Lark",
+        "openedYear": 2025,
+        "parts": [],
+        "priority": "high",
+        "reference": "SYN-JOB-3",
+        "slaHoursRemaining": 14,
+        "status": "on-site",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Kestrel SYN-Moss",
+          "handle": "SYN-HANDLE-3"
+        }
+      },
+      "meta": {
+        "edges": [
+          "empty:parts",
+          "enum:priority=high",
+          "enum:status=on-site"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-4": {
+      "data": {
+        "address": "SYN Street 3",
+        "customerName": "Heath SYN-Bramble",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Pressure relief valve",
+            "onBackorder": false,
+            "sku": "PRV-3302"
+          },
+          {
+            "description": "Copper fitting 3/4 in",
+            "onBackorder": false,
+            "sku": "CUF-0734"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-4",
+        "slaHoursRemaining": 19,
+        "status": "blocked",
+        "technician": {
+          "concurrentJobs": 0,
+          "displayName": "Heath SYN-Bramble",
+          "handle": "SYN-HANDLE-4"
+        }
+      },
+      "meta": {
+        "edges": [
+          "enum:status=blocked"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-5": {
+      "data": {
+        "address": "SYN Street 4",
+        "customerName": "Kestrel SYN-Moss",
+        "openedYear": 2020,
+        "parts": [
+          {
+            "description": "Igniter assembly",
+            "onBackorder": true,
+            "sku": "IGN-5510"
+          },
+          {
+            "description": "Flame sensor rod",
+            "onBackorder": true,
+            "sku": "FLS-5521"
+          },
+          {
+            "description": "Gas valve regulator",
+            "onBackorder": true,
+            "sku": "GVR-5533"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-5",
+        "slaHoursRemaining": 0,
+        "status": "complete",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Juniper SYN-Slate",
+          "handle": "SYN-HANDLE-5"
+        }
+      },
+      "meta": {
+        "edges": [
+          "enum:status=complete"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-6": {
+      "data": {
+        "address": "SYN Street 5",
+        "customerName": "Linden SYN-Pike",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Blower wheel 10 in",
+            "onBackorder": false,
+            "sku": "BLW-1010"
+          },
+          {
+            "description": "Air filter 20x25",
+            "onBackorder": false,
+            "sku": "FIL-2025"
+          }
+        ],
+        "priority": "high",
+        "reference": "SYN-JOB-6",
+        "slaHoursRemaining": 1,
+        "status": "scheduled",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Linden SYN-Pike",
+          "handle": "SYN-HANDLE-6"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-7": {
+      "data": {
+        "address": "SYN Street 6",
+        "customerName": "Ember SYN-Wick",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Circulator pump",
+            "onBackorder": true,
+            "sku": "PMP-7701"
+          },
+          {
+            "description": "Expansion tank",
+            "onBackorder": true,
+            "sku": "EXT-7712"
+          },
+          {
+            "description": "Check valve 1 in",
+            "onBackorder": true,
+            "sku": "CHK-7723"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-7",
+        "slaHoursRemaining": 3,
+        "status": "dispatched",
+        "technician": {
+          "concurrentJobs": 0,
+          "displayName": "Kestrel SYN-Moss",
+          "handle": "SYN-HANDLE-7"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-8": {
+      "data": {
+        "address": "SYN Street 7",
+        "customerName": "Linden SYN-Pike",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Drain pan sensor",
+            "onBackorder": false,
+            "sku": "DPS-8801"
+          },
+          {
+            "description": "PVC drain line kit",
+            "onBackorder": false,
+            "sku": "PVC-8812"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-8",
+        "slaHoursRemaining": 12,
+        "status": "on-site",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Linden SYN-Pike",
+          "handle": "SYN-HANDLE-8"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-9": {
+      "data": {
+        "address": "SYN Street 8",
+        "customerName": "Alder SYN-Quill",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Compressor start relay",
+            "onBackorder": true,
+            "sku": "CSR-9901"
+          }
+        ],
+        "priority": "high",
+        "reference": "SYN-JOB-9",
+        "slaHoursRemaining": 15,
+        "status": "blocked",
+        "technician": {
+          "concurrentJobs": 2,
+          "displayName": "Cedar SYN-Lark",
+          "handle": "SYN-HANDLE-9"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-10": {
+      "data": {
+        "address": "SYN Street 9",
+        "customerName": "Alder SYN-Quill",
+        "openedYear": 2024,
+        "parts": [
+          {
+            "description": "Door gasket",
+            "onBackorder": false,
+            "sku": "GSK-1001"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-10",
+        "slaHoursRemaining": 0,
+        "status": "complete",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Pebble SYN-Reed",
+          "handle": "SYN-HANDLE-10"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-11": {
+      "data": {
+        "address": "SYN Street 10",
+        "customerName": "Nettle SYN-Ash",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Control board",
+            "onBackorder": true,
+            "sku": "PCB-1101"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-11",
+        "slaHoursRemaining": 11,
+        "status": "scheduled",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Linden SYN-Pike",
+          "handle": "SYN-HANDLE-11"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-12": {
+      "data": {
+        "address": "SYN Street 11",
+        "customerName": "Brook SYN-Marrow",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Heating element 5kW",
+            "onBackorder": false,
+            "sku": "HTE-1201"
+          },
+          {
+            "description": "High limit switch",
+            "onBackorder": false,
+            "sku": "HLS-1212"
+          }
+        ],
+        "priority": "high",
+        "reference": "SYN-JOB-12",
+        "slaHoursRemaining": 11,
+        "status": "dispatched",
+        "technician": {
+          "concurrentJobs": 0,
+          "displayName": "Alder SYN-Quill",
+          "handle": "SYN-HANDLE-12"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-13": {
+      "data": {
+        "address": "SYN Street 12",
+        "customerName": "Garnet SYN-Fold",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Water inlet valve",
+            "onBackorder": true,
+            "sku": "WIV-1301"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-13",
+        "slaHoursRemaining": 10,
+        "status": "on-site",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Dune SYN-Tallow",
+          "handle": "SYN-HANDLE-13"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-14": {
+      "data": {
+        "address": "SYN Street 13",
+        "customerName": "Kestrel SYN-Moss",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Belt drive 4L",
+            "onBackorder": false,
+            "sku": "BLT-1401"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-14",
+        "slaHoursRemaining": 19,
+        "status": "blocked",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Pebble SYN-Reed",
+          "handle": "SYN-HANDLE-14"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-15": {
+      "data": {
+        "address": "SYN Street 14",
+        "customerName": "Garnet SYN-Fold",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Evaporator coil",
+            "onBackorder": true,
+            "sku": "EVC-1501"
+          }
+        ],
+        "priority": "high",
+        "reference": "SYN-JOB-15",
+        "slaHoursRemaining": 0,
+        "status": "complete",
+        "technician": {
+          "concurrentJobs": 0,
+          "displayName": "Pebble SYN-Reed",
+          "handle": "SYN-HANDLE-15"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-16": {
+      "data": {
+        "address": "SYN Street 15",
+        "customerName": "Brook SYN-Marrow",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Fuse 30A",
+            "onBackorder": false,
+            "sku": "FUS-1601"
+          },
+          {
+            "description": "Wire harness",
+            "onBackorder": false,
+            "sku": "WRH-1612"
+          },
+          {
+            "description": "Transformer 40VA",
+            "onBackorder": false,
+            "sku": "TRF-1623"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-16",
+        "slaHoursRemaining": 6,
+        "status": "scheduled",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Kestrel SYN-Moss",
+          "handle": "SYN-HANDLE-16"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-17": {
+      "data": {
+        "address": "SYN Street 16",
+        "customerName": "Linden SYN-Pike",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Inducer motor",
+            "onBackorder": true,
+            "sku": "IND-1701"
+          },
+          {
+            "description": "Pressure switch",
+            "onBackorder": true,
+            "sku": "PRS-1712"
+          },
+          {
+            "description": "Vent pipe 4 in",
+            "onBackorder": true,
+            "sku": "VNT-1723"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-17",
+        "slaHoursRemaining": 13,
+        "status": "dispatched",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Cedar SYN-Lark",
+          "handle": "SYN-HANDLE-17"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-18": {
+      "data": {
+        "address": "SYN Street 17",
+        "customerName": "Linden SYN-Pike",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Refrigerant R410A 5lb",
+            "onBackorder": false,
+            "sku": "REF-1801"
+          },
+          {
+            "description": "Service valve core",
+            "onBackorder": false,
+            "sku": "SVC-1812"
+          }
+        ],
+        "priority": "high",
+        "reference": "SYN-JOB-18",
+        "slaHoursRemaining": 24,
+        "status": "on-site",
+        "technician": {
+          "concurrentJobs": 1,
+          "displayName": "Alder SYN-Quill",
+          "handle": "SYN-HANDLE-18"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-19": {
+      "data": {
+        "address": "SYN Street 18",
+        "customerName": "Dune SYN-Tallow",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Humidifier pad",
+            "onBackorder": true,
+            "sku": "HMP-1901"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-19",
+        "slaHoursRemaining": 23,
+        "status": "blocked",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Linden SYN-Pike",
+          "handle": "SYN-HANDLE-19"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-20": {
+      "data": {
+        "address": "SYN Street 19",
+        "customerName": "Garnet SYN-Fold",
+        "openedYear": 2020,
+        "parts": [
+          {
+            "description": "Condensate pump",
+            "onBackorder": false,
+            "sku": "CDP-2001"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-20",
+        "slaHoursRemaining": 0,
+        "status": "complete",
+        "technician": {
+          "concurrentJobs": 0,
+          "displayName": "Kestrel SYN-Moss",
+          "handle": "SYN-HANDLE-20"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-21": {
+      "data": {
+        "address": "SYN Street 20",
+        "customerName": "Cedar SYN-Lark",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Zone damper actuator",
+            "onBackorder": true,
+            "sku": "DMP-2101"
+          }
+        ],
+        "priority": "high",
+        "reference": "SYN-JOB-21",
+        "slaHoursRemaining": 21,
+        "status": "scheduled",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Heath SYN-Bramble",
+          "handle": "SYN-HANDLE-21"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-22": {
+      "data": {
+        "address": "SYN Street 21",
+        "customerName": "Cedar SYN-Lark",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Flue collar",
+            "onBackorder": false,
+            "sku": "FLC-2201"
+          },
+          {
+            "description": "Mounting bracket",
+            "onBackorder": false,
+            "sku": "MNB-2212"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-22",
+        "slaHoursRemaining": 19,
+        "status": "dispatched",
+        "technician": {
+          "concurrentJobs": 4,
+          "displayName": "Cedar SYN-Lark",
+          "handle": "SYN-HANDLE-22"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-23": {
+      "data": {
+        "address": "SYN Street 22",
+        "customerName": "Garnet SYN-Fold",
+        "openedYear": 2025,
+        "parts": [
+          {
+            "description": "Thermocouple",
+            "onBackorder": true,
+            "sku": "TCP-2301"
+          },
+          {
+            "description": "Pilot assembly",
+            "onBackorder": true,
+            "sku": "PLT-2312"
+          }
+        ],
+        "priority": "normal",
+        "reference": "SYN-JOB-23",
+        "slaHoursRemaining": 10,
+        "status": "on-site",
+        "technician": {
+          "concurrentJobs": 0,
+          "displayName": "Juniper SYN-Slate",
+          "handle": "SYN-HANDLE-23"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-24": {
+      "data": {
+        "address": "SYN Street 23",
+        "customerName": "Linden SYN-Pike",
+        "openedYear": 2026,
+        "parts": [
+          {
+            "description": "Fan relay",
+            "onBackorder": false,
+            "sku": "FRL-2401"
+          },
+          {
+            "description": "Filter drier",
+            "onBackorder": false,
+            "sku": "FDR-2412"
+          },
+          {
+            "description": "Sight glass",
+            "onBackorder": false,
+            "sku": "SGL-2423"
+          }
+        ],
+        "priority": "high",
+        "reference": "SYN-JOB-24",
+        "slaHoursRemaining": 9,
+        "status": "blocked",
+        "technician": {
+          "concurrentJobs": 3,
+          "displayName": "Juniper SYN-Slate",
+          "handle": "SYN-HANDLE-24"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    },
+    "SYN-JOB-25": {
+      "data": {
+        "address": "SYN Street 24",
+        "customerName": "Dune SYN-Tallow",
+        "openedYear": 2020,
+        "parts": [
+          {
+            "description": "Thermal expansion valve",
+            "onBackorder": true,
+            "sku": "TXV-2501"
+          },
+          {
+            "description": "Insulation wrap",
+            "onBackorder": true,
+            "sku": "INS-2512"
+          }
+        ],
+        "priority": "low",
+        "reference": "SYN-JOB-25",
+        "slaHoursRemaining": 0,
+        "status": "complete",
+        "technician": {
+          "concurrentJobs": 0,
+          "displayName": "Brook SYN-Marrow",
+          "handle": "SYN-HANDLE-25"
+        }
+      },
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      }
+    }
+  }
+}

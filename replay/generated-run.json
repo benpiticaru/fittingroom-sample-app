@@ -1,0 +1,295 @@
+{
+  "ticket": "FR-145",
+  "recordedOn": "2026-10-17",
+  "environment": {
+    "os": "macOS 27.0.1",
+    "model": "claude-sonnet-5-5",
+    "claudeCode": "2.1.302",
+    "claudeCodeUsedFor": "live edits only, on the machine's Claude Code login (not the API key, not in the cost below)",
+    "cpus": 14
+  },
+  "prices": {
+    "model": "claude-sonnet-5-5",
+    "inUsdPerMTok": 2,
+    "outUsdPerMTok": 10,
+    "source": "owner, 2026-10-17"
+  },
+  "generation": {
+    "persona": "supervisor",
+    "session": "generate-20261017T134054Z",
+    "startedAt": "2026-10-17T13:40:53Z",
+    "seed": 390309489,
+    "rows": 25,
+    "endpoint": "jobs",
+    "mechanicalFields": [],
+    "byLabel": {
+      "graph": {
+        "calls": 1,
+        "failed": 0,
+        "inputTokens": 1435,
+        "outputTokens": 49,
+        "ms": 1123,
+        "usd": 0.00336
+      },
+      "supervisor/jobs": {
+        "calls": 1,
+        "failed": 0,
+        "inputTokens": 7976,
+        "outputTokens": 1806,
+        "ms": 12888,
+        "usd": 0.034012
+      }
+    },
+    "total": {
+      "calls": 2,
+      "failed": 0,
+      "inputTokens": 9411,
+      "outputTokens": 1855,
+      "ms": 14011,
+      "usd": 0.037372
+    },
+    "wallClockSeconds": 14.59,
+    "load1": 4.0,
+    "load1End": 3.68,
+    "approvedDigest": "sha256:c03ac219def592d1dc27a33f354b15e23a7e827222b63aa0a895a9c44fa91f43",
+    "approveSeconds": 0.48
+  },
+  "review": {
+    "reviewer": "the domain reader (the owner)",
+    "minutes": 3,
+    "decision": "approved",
+    "notes": "Looks right. Completed jobs with backordered parts are odd."
+  },
+  "planner": {
+    "persona": "planner",
+    "session": "generate-20261017T143937Z",
+    "startedAt": "2026-10-17T14:39:37Z",
+    "seed": 1,
+    "rows": 2,
+    "summary": {
+      "calls": 1,
+      "failed": 0,
+      "inputTokens": 1874,
+      "outputTokens": 354,
+      "ms": 4140,
+      "usd": 0.007288
+    },
+    "wallClockSeconds": 4.65,
+    "freeCoverageCheck": "parts[].onBackorder is never-true in the planner bundle",
+    "approval": "approved in advance through the owner's go; no separate timed review",
+    "approvedDigest": "sha256:d7a3dda61e029e089fac6e58d228c841fce85e6a71c5fa11a1e597f4739aa980"
+  },
+  "dataStepRuns": [
+    {
+      "run": 1,
+      "fittingId": "fit-01a14a4eafe8413e",
+      "startedAt": "2026-10-17T14:40:33Z",
+      "persona": "planner",
+      "request": "Flag any job with a part on backorder",
+      "classified": {
+        "kind": "display-rule",
+        "scope": "frontend",
+        "dataNeeds": [
+          "parts[].onBackorder"
+        ]
+      },
+      "callsByRole": {
+        "first-pass": 1,
+        "data": 1
+      },
+      "byRole": {
+        "first-pass": {
+          "calls": 1,
+          "failed": 0,
+          "inputTokens": 2685,
+          "outputTokens": 159,
+          "ms": 1688,
+          "usd": 0.00696
+        },
+        "data": {
+          "calls": 1,
+          "failed": 0,
+          "inputTokens": 1782,
+          "outputTokens": 97,
+          "ms": 1316,
+          "usd": 0.004534
+        }
+      },
+      "apiCalls": 2,
+      "inputTokens": 4467,
+      "outputTokens": 256,
+      "ms": 3004,
+      "usd": 0.011494,
+      "liveEditSeconds": 45.4,
+      "status": "not-kept",
+      "reason": "check-failed",
+      "failingTests": "4 failures reported; the stored detail keeps 3: src/fixtures/persona.test.ts (layout assertion that the personas folder holds only dispatcher; our own test, fixed afterwards) and src/features/jobs/JobsTable.test.tsx 'applies no flag styling when the config declares no displayRules' (the agent hard-coded row flagging in JobsTable.tsx)"
+    },
+    {
+      "run": 2,
+      "fittingId": "fit-01a14a81ec9c7405",
+      "startedAt": "2026-10-17T15:36:31Z",
+      "persona": "planner",
+      "request": "Flag any job with a part on backorder",
+      "classified": {
+        "kind": "display-rule",
+        "scope": "frontend",
+        "dataNeeds": [
+          "parts[].onBackorder"
+        ]
+      },
+      "callsByRole": {
+        "first-pass": 1,
+        "data": 2
+      },
+      "byRole": {
+        "first-pass": {
+          "calls": 1,
+          "failed": 0,
+          "inputTokens": 2685,
+          "outputTokens": 160,
+          "ms": 2071,
+          "usd": 0.00697
+        },
+        "data": {
+          "calls": 2,
+          "failed": 0,
+          "inputTokens": 3582,
+          "outputTokens": 193,
+          "ms": 2275,
+          "usd": 0.009094
+        }
+      },
+      "apiCalls": 3,
+      "inputTokens": 6267,
+      "outputTokens": 353,
+      "ms": 4346,
+      "usd": 0.016064,
+      "liveEditSeconds": 54.1,
+      "status": "not-kept",
+      "reason": "check-failed",
+      "failingTests": "3 failures reported; the stored detail keeps the tail of a waitFor timeout in src/snapshot.e2e.test.tsx and src/features/jobs/JobsTable.test.tsx 'applies no flag styling when the config declares no displayRules' (the same JobsTable regression as run 1); the data step needed one retry (2 data calls)"
+    },
+    {
+      "run": 3,
+      "fittingId": "fit-01a14a90132561a1",
+      "startedAt": "2026-10-17T15:51:58Z",
+      "persona": "planner",
+      "request": "Show a small 'backordered' badge next to each part that is on backorder.",
+      "classified": {
+        "kind": "display-rule",
+        "scope": "frontend",
+        "dataNeeds": [
+          "parts[].onBackorder"
+        ]
+      },
+      "callsByRole": {
+        "first-pass": 1,
+        "data": 2
+      },
+      "byRole": {
+        "first-pass": {
+          "calls": 1,
+          "failed": 0,
+          "inputTokens": 2696,
+          "outputTokens": 156,
+          "ms": 1572,
+          "usd": 0.006952
+        },
+        "data": {
+          "calls": 2,
+          "failed": 0,
+          "inputTokens": 3582,
+          "outputTokens": 193,
+          "ms": 2195,
+          "usd": 0.009094
+        }
+      },
+      "apiCalls": 3,
+      "inputTokens": 6278,
+      "outputTokens": 349,
+      "ms": 3767,
+      "usd": 0.016046,
+      "liveEditSeconds": 62.2,
+      "status": "not-kept",
+      "reason": "check-failed",
+      "failingTests": "2 failures reported; the stored detail keeps the second, a waitFor timeout in src/snapshot.e2e.test.tsx:91 (the agent edited src/features/jobs/JobDetail.tsx and src/index.css). The exact test command passed twice on a clean worktree of the base branch at a 1-minute load of about 22, so the failures came with the edit; the data step needed one retry (2 data calls)"
+    }
+  ],
+  "totals": {
+    "generation": {
+      "calls": 2,
+      "failed": 0,
+      "inputTokens": 9411,
+      "outputTokens": 1855,
+      "ms": 14011,
+      "usd": 0.037372
+    },
+    "planner": {
+      "calls": 1,
+      "failed": 0,
+      "inputTokens": 1874,
+      "outputTokens": 354,
+      "ms": 4140,
+      "usd": 0.007288
+    },
+    "dataStepRuns": {
+      "apiCalls": 8,
+      "inputTokens": 17012,
+      "outputTokens": 958,
+      "usd": 0.043604
+    },
+    "afterGeneration": {
+      "apiCalls": 9,
+      "inputTokens": 18886,
+      "outputTokens": 1312,
+      "usd": 0.050892
+    },
+    "all": {
+      "apiCalls": 11,
+      "inputTokens": 28297,
+      "outputTokens": 3167,
+      "usd": 0.088264
+    }
+  },
+  "earlierRuns": [
+    "2026-10-16: an earlier run, not approved, not used.",
+    "2026-10-17, before the model default and enum fixes (FR-166, FR-167, FR-168): an earlier run, superseded, approval withdrawn, not used."
+  ],
+  "mergeBack": {
+    "simulated": true,
+    "how": "no data step was kept, so there was no fitting branch to merge. In a throwaway copy of the export the recorded plan (plan-backorder.json) was applied to the planner bundle with core's applyDataPlan outside a live edit, written the way a kept data step writes it, committed on a branch and merged into the base branch.",
+    "steps": [
+      "node apply-plan: applyDataPlan(planner bundle, recorded plan, entity graph) added SYN-JOB-3, a clone of SYN-JOB-2 with parts[0].onBackorder true",
+      "git commit on a branch, git merge --no-ff into the base branch",
+      "npx fit fitting start --role planner --screen jobs --fixture jobs --base main",
+      "npx fit fixtures approve --persona planner",
+      "git commit .fitting-room/data/generation.json",
+      "npx fit fitting start --role planner --screen jobs --fixture jobs --base main"
+    ],
+    "added": {
+      "endpoint": "jobs",
+      "key": "SYN-JOB-3",
+      "cloneOf": "SYN-JOB-2"
+    },
+    "startCommand": "npx fit fitting start --role planner --screen jobs --fixture jobs --base main",
+    "refusal": "generated fixtures changed since approval: planner",
+    "refusalExit": 1,
+    "digestBefore": "sha256:d7a3dda61e029e089fac6e58d228c841fce85e6a71c5fa11a1e597f4739aa980",
+    "reapprove": "approved planner sha256:af961f2e9f924417965ec87f35d2029620b652876ab1ace39471db62a81eee99",
+    "reapproveNote": "commit .fitting-room/data/generation.json with the bundle",
+    "digestAfter": "sha256:af961f2e9f924417965ec87f35d2029620b652876ab1ace39471db62a81eee99",
+    "startAfter": "Started fit-01a14b384f914e58 → .fitting-room/sessions/fit-01a14b384f914e58.json",
+    "startAfterExit": 0
+  },
+  "deferred": {
+    "ticket": "FR-176",
+    "blockedBy": "FR-175",
+    "items": [
+      "a kept data step in a real fitting: every live edit after the data step was refused by the host's own check (FR-175 routes a display-rule request with data needs to a code edit that hard-codes styling)",
+      "the gap render replay (On the job detail, show the customer's loyalty tier): never reached",
+      "the revert cascade count the spec asks GD6 to count",
+      "merge-back of a real kept data step; mergeBack above applies the recorded plan outside a live edit instead"
+    ]
+  }
+}

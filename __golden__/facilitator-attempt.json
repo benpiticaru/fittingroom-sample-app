@@ -1,0 +1,16 @@
+{
+  "outcome": "stopped",
+  "branch": "fitting/fit-019a0c3e5f2a0b7c",
+  "appliedPinIds": [
+    "pin-1",
+    "pin-2"
+  ],
+  "blockedOn": {
+    "name": "warrantyStatus"
+  },
+  "question": "Where does warrantyStatus come from, and is it in scope?",
+  "routeTo": [
+    "backend lead",
+    "requesting stakeholder"
+  ]
+}

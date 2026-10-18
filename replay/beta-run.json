@@ -1,0 +1,142 @@
+{
+  "ticket": "FR-17",
+  "recordedOn": "2026-10-15",
+  "site": "export",
+  "load": {
+    "gate": "none; load is recorded, not gated (owner waived the gate on 2026-10-14)",
+    "note": "Every 1-minute load average taken during the run was under 15 (3.8 to 9.5), so the timings are not stated to overstate. The machine was not idle: the load comes from unrelated work on the same host."
+  },
+  "environment": {
+    "os": "macOS 27.0.1",
+    "node": "v22.23.1",
+    "claudeCode": "2.1.300",
+    "vite": "5.4.21",
+    "agent": "claude",
+    "cpus": 18
+  },
+  "install": {
+    "name": "install (npm ci in the scratch export, from setup-timing, whole seconds)",
+    "seconds": 1,
+    "load1": 9.49,
+    "load1End": 9.49
+  },
+  "buildMuslin": {
+    "name": "build:muslin (whole seconds)",
+    "seconds": 1,
+    "load1": 9.49,
+    "load1End": 9.49
+  },
+  "promotion": {
+    "name": "promotion (not timed separately: inside pin-2's live edit seconds; the fitting worktree's own npm ci took 0.9 s by npm's report)",
+    "seconds": 0,
+    "load1": 8.89,
+    "load1End": 8.89
+  },
+  "pins": [
+    {
+      "utterance": "Flag any job with a part on backorder so I can chase it.",
+      "pinId": "pin-2",
+      "status": "kept",
+      "seconds": 40.9,
+      "load1": 8.89,
+      "load1End": 6.11,
+      "phases": [],
+      "paths": [
+        "src/features/jobs/JobsTable.tsx +14 -1",
+        "src/index.css +14 -0"
+      ]
+    },
+    {
+      "utterance": "A badge on the row is enough.",
+      "pinId": "pin-3",
+      "status": "not-kept",
+      "reason": "no-change",
+      "seconds": 10.2,
+      "load1": 6.11,
+      "load1End": 5.33,
+      "phases": []
+    },
+    {
+      "utterance": "add interactive sort functionality to each column",
+      "pinId": "pin-5",
+      "status": "kept",
+      "seconds": 48,
+      "load1": 5.14,
+      "load1End": 3.81,
+      "phases": [],
+      "paths": [
+        "src/features/jobs/JobsTable.tsx +52 -3",
+        "src/index.css +19 -0"
+      ]
+    }
+  ],
+  "attempt": {
+    "seconds": 4.8,
+    "load1": 8.89,
+    "load1End": 4.63,
+    "outcome": "stopped on lastVisitDate; the host testCommand exited 0 (load is the whole driver run start and end, not the attempt alone)"
+  },
+  "commits": [
+    "pin-1: Put the technician right after the status, that's who I look for\u2026",
+    "pin-2: Flag any job with a part on backorder so I can chase it.",
+    "code pin-2: Flag any job with a part on backorder so I can chase it.",
+    "record: live edit",
+    "pin-3: A badge on the row is enough.",
+    "record: live edit",
+    "pin-4: Add a last visit date column",
+    "pin-5: add interactive sort functionality to each column",
+    "code pin-5: add interactive sort functionality to each column",
+    "record: live edit",
+    "withdraw pin-1: Put the technician right after the status, that's who I\u2026",
+    "submit: 4 pins",
+    "record: attempt result"
+  ],
+  "codeCommit": {
+    "paths": [
+      "src/features/jobs/JobsTable.tsx",
+      "src/index.css"
+    ],
+    "added": 71,
+    "removed": 3
+  },
+  "liveLines": [
+    "[live] added 178 packages, and audited 179 packages in 892ms",
+    "[live] 31 packages are looking for funding",
+    "[live]   run `npm fund` for details",
+    "[live] 6 vulnerabilities (3 moderate, 1 high, 2 critical)",
+    "[live] To address all issues (including breaking changes), run:",
+    "[live]   npm audit fix --force",
+    "[live] Run `npm audit` for details.",
+    "[live] npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation",
+    "[live] ",
+    "[live] > dev:muslin",
+    "[live] > fit muslin dev --host 127.0.0.1 --port 57319 --strictPort",
+    "[live] ",
+    "[live] The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.",
+    "[live] muslin dev server: http://127.0.0.1:57319/",
+    "[live] 10:19:10 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 10:19:13 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 10:19:15 AM [vite] hmr update /src/index.css",
+    "[live] 10:19:26 AM [vite] page reload src/features/jobs/tableConfig.json",
+    "[live] 10:19:26 AM [vite] page reload src/features/jobs/tableConfig.muslin.json",
+    "[live] pin-3: not-kept no-change",
+    "[live] 10:19:39 AM [vite] page reload src/features/jobs/tableConfig.json",
+    "[live] 10:19:39 AM [vite] page reload src/features/jobs/tableConfig.muslin.json",
+    "[live] 10:19:40 AM [vite] page reload src/features/jobs/tableConfig.json",
+    "[live] 10:19:40 AM [vite] page reload src/features/jobs/tableConfig.muslin.json",
+    "[live] 10:20:04 AM [vite] hmr update /src/index.css",
+    "[live] 10:20:10 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 10:20:15 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 10:20:16 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 10:20:18 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 10:20:20 AM [vite] hmr update /src/features/jobs/JobsTable.tsx",
+    "[live] 10:20:29 AM [vite] page reload src/features/jobs/tableConfig.json",
+    "[live] 10:20:29 AM [vite] page reload src/features/jobs/tableConfig.muslin.json",
+    "[live] ",
+    "[live] > dev:muslin",
+    "[live] > fit muslin dev --host 127.0.0.1 --port 57400 --strictPort",
+    "[live] ",
+    "[live] The CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.",
+    "[live] muslin dev server: http://127.0.0.1:57400/"
+  ]
+}

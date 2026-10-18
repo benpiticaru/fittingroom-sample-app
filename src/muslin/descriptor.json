@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "app": { "name": "sample-dispatch", "screen": "Dispatch worklist" },
+  "route": "/",
+  "router": "history",
+  "entity": "job",
+  "rowIdField": "reference",
+  "fields": {
+    "reference": "The job reference shown in the first column",
+    "status": "Where the job is: scheduled, dispatched, on-site, blocked or complete",
+    "priority": "How urgent the job is: low, normal or high",
+    "customerName": "The customer the job is for",
+    "technician": "The technician assigned to the job",
+    "slaHoursRemaining": "Hours left against the service level; negative means overdue",
+    "openedYear": "The year the job was opened",
+    "warrantyStatus": "Warranty status of the job; not in the data today"
+  },
+  "surface": {
+    "live": {
+      "columnOrder": "The order of the columns in the worklist",
+      "hiddenByDefault": "Which columns start hidden",
+      "labels": "The heading shown over each column",
+      "density": "Comfortable or compact rows",
+      "displayRules": "Which rows are styled, such as overdue jobs",
+      "placeholderColumns": "Columns the data does not carry yet, marked and shown with an illustrative example value (or a dash when there is none)"
+    },
+    "recordedOnly": {
+      "defaultSort": "The starting sort of the worklist; recorded with your pin, but the table does not sort yet",
+      "defaultFilter": "A starting filter on the worklist; recorded with your pin, but the table does not filter yet"
+    }
+  },
+  "configPath": "src/features/jobs/tableConfig.json"
+}

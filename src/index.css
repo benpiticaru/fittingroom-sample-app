@@ -44,6 +44,18 @@
   font-weight: 400;
 }
 
+/* Marks a sample value as an example, not data. */
+.jobs-table .example-tag {
+  font-size: 0.75em;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  padding: 0 0.3em;
+  margin-left: 0.3em;
+}
+
 /*
  * A row the config's `displayRules` flagged. This has to be visible: a
  * stakeholder who says "flag the overdue ones" is pinning `displayRules`, and

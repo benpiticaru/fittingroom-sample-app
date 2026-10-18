@@ -1,12 +1,26 @@
 {
   "app": { "name": "sample-dispatch" },
   "muslin": {
-    "buildFlag": "VITE_FITTINGROOM=1",
+    "aliases": { "api": { "file": "./src/api/client.ts", "to": "./src/muslin/client.ts" } },
+    "descriptor": "./src/muslin/descriptor.json",
     "fixtures": "src/fixtures",
     "configSurface": "src/features/jobs/tableConfig.json",
-    "overlay": "src/features/jobs/tableConfig.muslin.json"
+    "overlay": "src/features/jobs/tableConfig.muslin.json",
+    "screens": { "/": { "endpoints": ["jobs"] } },
+    "personas": "src/fixtures/personas",
+    "data": { "types": "./src/api/types.ts", "nameFields": ["customerName"] }
   },
+  "attempt": {
+    "delegate": false,
+    "testCommand": "npx vitest run --project sample-app --exclude \"**/*replay.test.ts\" --exclude \"**/*.live.test.ts\""
+  },
+  "liveEdit": {
+    "enabled": true,
+    "protect": ["src/api/client.ts", "src/muslin/**"],
+    "agentEnv": ["USER", "LOGNAME"]
+  },
+  "providers": { "claude": { "model": "claude-sonnet-5-5", "maxTokens": 4096 } },
   "window": { "open": false },
   "agent": "facilitator",
-  "tracker": { "kind": "github-issues" }
+  "publish": { "tracker": "none" }
 }

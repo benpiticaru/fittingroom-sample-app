@@ -16,9 +16,14 @@ describe("dispatcher persona bundle", () => {
   });
 
   it("matches the <personas>/<role>/ layout", () => {
+    // FR-145: generated personas (user.json `meta.source: "generated"`, gated by `fit fixtures approve`) sit beside the
+    // one hand-written bundle; the hand-written set stays exactly the dispatcher.
+    const generated = (role: string): boolean =>
+      (JSON.parse(readFileSync(`${personas}${role}/user.json`, "utf8")) as { meta?: { source?: string } }).meta?.source === "generated";
     const roles = readdirSync(personas, { withFileTypes: true })
       .filter((e) => e.isDirectory() && !e.name.startsWith("."))
-      .map((e) => e.name);
+      .map((e) => e.name)
+      .filter((role) => !generated(role));
     expect(roles).toEqual(["dispatcher"]);
     expect(roles[0]).toBe(dispatcherBundle.name);
     expect(roles[0]).toBe(dispatcherBundle.user.data.role);

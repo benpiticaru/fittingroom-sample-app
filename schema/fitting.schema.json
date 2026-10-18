@@ -132,6 +132,19 @@
     "Pin": {
       "type": "object",
       "properties": {
+        "dataNeeds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Field paths the change depends on, each a `dataFields` path (core's `keepDataNeeds`).",
+          "maxItems": 10
+        },
+        "renderGap": {
+          "type": "boolean",
+          "const": true,
+          "description": "A data-gap pin whose stakeholder asked to see the field rendered with example values (spec Revision 11, *Live edit of a gap*)."
+        },
         "id": {
           "type": "string",
           "pattern": "\\S"
@@ -208,6 +221,10 @@
         "notLiveReason": {
           "type": "string",
           "description": "Set from `liveness()`."
+        },
+        "liveEdit": {
+          "$ref": "#/definitions/LiveEditRecord",
+          "description": "Set by the server after a live edit (spec Revision 10); never trusted from an agent. A `kept` status makes the pin live."
         }
       },
       "required": [
@@ -329,6 +346,12 @@
     "ImpliedField": {
       "type": "object",
       "properties": {
+        "format": {
+          "type": "string",
+          "description": "Mask of the gap's example values: every digit `0`, letter runs only `SYN`, all `A` or a declared prefix (`normaliseMask`).",
+          "maxLength": 32,
+          "pattern": "^[A-Z0_./: -]+$"
+        },
         "name": {
           "type": "string",
           "description": "Suggested property name, camelCase."
@@ -396,6 +419,112 @@
       ],
       "additionalProperties": false,
       "description": "Where and as whom the stakeholder was when the pin was made."
+    },
+    "LiveEditRecord": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/LiveEditData",
+          "description": "Set when a data step wrote persona files for this edit (spec Revision 11)."
+        },
+        "status": {
+          "$ref": "#/definitions/LiveEditStatus"
+        },
+        "reason": {
+          "$ref": "#/definitions/LiveEditReason",
+          "description": "Set when the edit was not kept or was cancelled."
+        },
+        "commit": {
+          "type": "string",
+          "description": "The `code pin-<n>:` commit, when kept."
+        },
+        "revertCommit": {
+          "type": "string",
+          "description": "The `revert pin-<n>:` commit, when reverted."
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Source paths the kept change touched, repo-relative. Listed in the alterations for review."
+        },
+        "question": {
+          "type": "string",
+          "description": "The coding agent's `QUESTION:` text, when the reason is `question`. Shown in the alterations."
+        },
+        "detail": {
+          "type": "string",
+          "description": "Scrubbed tail of the check or dev-server output. Rendered only in the PR body's collapsed section, never in the panel."
+        },
+        "touch": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Selectors from the touch report (`Fitting-Touch` trailers)."
+        },
+        "ms": {
+          "type": "number",
+          "description": "How long the transaction took, in milliseconds."
+        }
+      },
+      "required": [
+        "status",
+        "ms"
+      ],
+      "additionalProperties": false,
+      "description": "The live-edit record on a pin (spec Revision 10, *Record*). Written by the server from the transaction's result; never trusted from an agent (`stamp()` drops it)."
+    },
+    "LiveEditData": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Persona files the data step wrote, repo-relative."
+        },
+        "records": {
+          "type": "integer",
+          "description": "Records the data step added.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "files",
+        "records"
+      ],
+      "additionalProperties": false,
+      "description": "Files and records a live edit's data step added (spec R11, *Repeatability and commits*)."
+    },
+    "LiveEditStatus": {
+      "type": "string",
+      "enum": [
+        "kept",
+        "not-kept",
+        "cancelled",
+        "reverted"
+      ],
+      "description": "What became of a pin's live edit: kept as a `code` commit, not kept, stopped, or kept and later reverted."
+    },
+    "LiveEditReason": {
+      "type": "string",
+      "enum": [
+        "dev-server",
+        "out-of-sync",
+        "write-set",
+        "too-large",
+        "identifier",
+        "interrupted",
+        "timeout",
+        "question",
+        "no-change",
+        "check-failed",
+        "agent-error"
+      ],
+      "description": "Why a live edit was not kept (spec Revision 10, *The transaction*)."
     },
     "TranscriptTurn": {
       "type": "object",
@@ -513,6 +642,13 @@
                 "type": "string"
               }
             },
+            "blockedPinIds": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Every blocking pin id, in precedence order (data-gap, backend, design, needs-code)."
+            },
             "fittingBranch": {
               "$ref": "#/definitions/FittingBranchRef",
               "description": "Branch an attempt created; `recordAttempt()` copies it onto `Fitting.branch`."
@@ -566,6 +702,13 @@
         },
         "id": {
           "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FittingTicketChild"
+          },
+          "description": "Child issues, in creation order. Absent when the tracker filed a single issue."
         }
       },
       "required": [
@@ -573,7 +716,42 @@
         "url"
       ],
       "additionalProperties": false,
-      "description": "A published ticket for a fitting, e.g. `{ tracker: \"github\", url, id }`."
+      "description": "A published ticket for a fitting, e.g. `{ tracker: \"github\", url, id }` or a Jira parent with `children`."
+    },
+    "FittingTicketChild": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": [
+            "route",
+            "pin"
+          ],
+          "description": "`route`: one per scope present; `pin`: one per pin."
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope"
+        },
+        "pinId": {
+          "type": "string",
+          "description": "Set when `role` is `pin`."
+        },
+        "id": {
+          "type": "string",
+          "description": "Tracker key, e.g. `SYN-2`."
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "scope",
+        "id",
+        "url"
+      ],
+      "additionalProperties": false,
+      "description": "A child issue filed under a fitting's parent ticket (Jira granularity `fitting+routes` or `pins`)."
     }
   }
 }

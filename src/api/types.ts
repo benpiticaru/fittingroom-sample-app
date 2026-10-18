@@ -42,6 +42,8 @@ export interface Job {
 export interface PlaceholderColumn {
   name: string;
   label: string;
+  /** Illustrative values, cycled per row. Absent: the cell shows an em dash. */
+  sample?: string[];
 }
 
 export interface TableConfig {

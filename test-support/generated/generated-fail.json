@@ -1,0 +1,85 @@
+{
+  "name": "dispatcher",
+  "user": {
+    "data": {
+      "role": "dispatcher",
+      "handle": "SYN-USER-1",
+      "displayName": "Alder SYN-Quill"
+    },
+    "meta": {
+      "edges": [
+        "default-persona"
+      ],
+      "synthetic": true,
+      "source": "generated"
+    }
+  },
+  "data": {
+    "jobs": {
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      },
+      "data": {
+        "SYN-JOB-1": {
+          "data": {
+            "reference": "SYN-JOB-1",
+            "status": "blocked",
+            "phoneType": "mobile",
+            "customerName": "Northgate Bakery Supply",
+            "notes": "Compressor relay rattles on start",
+            "address": "17 Harbour Lane, Northgate",
+            "postcode": "SYN-0000",
+            "city": "SYN City",
+            "contactDob": "unknown",
+            "technician": {
+              "handle": "tech-anders",
+              "displayName": "R. Andersen"
+            },
+            "parts": [
+              {
+                "sku": "SYN-PRT-1",
+                "serialNumber": "SYN-SERIALNUMBER-1",
+                "onBackorder": false
+              }
+            ]
+          },
+          "meta": {
+            "edges": [
+              "generated"
+            ],
+            "synthetic": true,
+            "source": "generated"
+          }
+        }
+      }
+    },
+    "technicians": {
+      "meta": {
+        "edges": [
+          "generated"
+        ],
+        "synthetic": true,
+        "source": "generated"
+      },
+      "data": {
+        "SYN-TECH-1": {
+          "data": {
+            "handle": "SYN-TECH-1",
+            "displayName": "Cedar SYN-Lark"
+          },
+          "meta": {
+            "edges": [
+              "generated"
+            ],
+            "synthetic": true,
+            "source": "generated"
+          }
+        }
+      }
+    }
+  }
+}

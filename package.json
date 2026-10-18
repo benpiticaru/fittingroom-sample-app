@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "dev:muslin": "VITE_FITTINGROOM=1 vite",
+    "dev:muslin": "fit muslin dev",
     "build": "vite build",
-    "build:muslin": "VITE_FITTINGROOM=1 vite build",
+    "build:muslin": "fit muslin build",
     "test": "vitest run"
   },
   "devDependencies": {
@@ -25,6 +25,7 @@
     "jsdom": "^25.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "typescript": "^5.7.0",
     "vite": "^5.4.0",
     "vitest": "^2.1.0"
   },

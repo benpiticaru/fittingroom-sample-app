@@ -1,10 +1,10 @@
 /**
  * Purpose: the API boundary. One real client, and the single build-time swap.
- * Responsibilities: expose JobsClient; resolve which client + config source the build uses.
+ * Responsibilities: expose JobsClient; resolve the production client + config source.
  * Inputs: none. Outputs: JobsClient, HttpClient, resolveHost().
- * Dependencies: ./types, ./configSource, ../features/jobs/tableConfig.json. The muslin module is
- *   imported dynamically and ONLY under the statically-folded flag check.
+ * Dependencies: ./types, ./configSource, ../features/jobs/tableConfig.json. Nothing here knows the muslin exists.
  * Side Effects: HttpClient performs fetch calls.
+ * Live edit never writes this file: it is the production half of the muslin seam (muslin.aliases.api swaps it at build time), listed in liveEdit.protect (.fitting-room/config.json).
  */
 import baseConfig from "../features/jobs/tableConfig.json";
 import { staticConfigSource } from "./configSource";
@@ -34,18 +34,7 @@ export class HttpClient implements JobsClient {
   }
 }
 
-/**
- * @description Pick the client and config source for this build. The muslin
- *   also mounts the panel before returning.
- * @invariants In a production build `import.meta.env.VITE_FITTINGROOM` is the
- *   literal "0", so the branch folds to false and neither ./muslin nor any
- *   fixture module is reachable from the bundle.
- */
+/** The production client and the static base config. `fit muslin build` swaps this module for src/muslin/client.ts. */
 export async function resolveHost(): Promise<{ client: JobsClient; store: ConfigSource }> {
-  if (import.meta.env.VITE_FITTINGROOM === "1") {
-    const { muslinClient, muslinStore, mountPanel } = await import("./muslin");
-    await mountPanel();
-    return { client: muslinClient, store: muslinStore };
-  }
   return { client: new HttpClient(), store: staticConfigSource(baseConfig as TableConfig) };
 }

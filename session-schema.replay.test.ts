@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import Ajv from "ajv";
 import { describe, expect, it } from "vitest";
-import { draftAlterations, renderMarkdown, type Fitting } from "@fitting-room/core";
+import { draftAlterations, isFittingId, renderMarkdown, type Fitting } from "@fitting-room/core";
 import { assertNoObviousIdentifiers } from "@fitting-room/fixtures";
 import { repoFile } from "./repo-file";
 
@@ -23,6 +23,11 @@ describe("committed example session", () => {
     expect(validate(session), ajv.errorsText(validate.errors)).toBe(true);
   });
 
+  it("has an id that passes isFittingId, and an attempt branch derived from it", () => {
+    expect(isFittingId(session.id)).toBe(true);
+    expect(session.attempt?.branch).toBe(`fitting/${session.id}`);
+  });
+
   it("contains no obvious identifiers", () => {
     expect(() => assertNoObviousIdentifiers(session)).not.toThrow();
   });
@@ -31,8 +36,8 @@ describe("committed example session", () => {
     const md = renderMarkdown(draftAlterations(session));
     const pins = session.pins;
 
-    it("quotes every utterance verbatim", () => {
-      for (const p of pins) expect(md).toContain(`> ${p.utterance}`);
+    it("shows every utterance verbatim, inert in a fenced block (FR-107)", () => {
+      for (const p of pins) expect(md).toContain("```\n" + p.utterance + "\n```");
     });
     it("diffs config against real before values", () => {
       const layout = pins.find((p) => p.configPatch)!;

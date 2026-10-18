@@ -1,1 +1,7 @@
 generated from benpiticaru/fittingroom examples/sample-app by scripts/export-sample-app.mjs
+input @fitting-room/adapter-msw sha256-33ad16b30ba8f994ccd4caf6acde47a63d5459ec0dddcb9e83b0ff04b4c4391d
+input @fitting-room/agent sha256-adcc201a7e9dea852bc26c9e429a106b26be010a92a1d8fc0f4b67fbd1c520d4
+input @fitting-room/cli sha256-7bb5eec960885d1a52c4a9b31b136820ccd7f1169291f65becac9a92099063a8
+input @fitting-room/core sha256-2479472b57fdef60d30b46ef31151e186db7fa4b18793d9ece1b1eaafb5398b1
+input @fitting-room/fixtures sha256-dcae42abc351765632532e559bcca0961b8ba7f4c98a0de8e8698dd795a6b5d7
+input @fitting-room/panel sha256-e57e32215b1695cdae196cb249bb354c1f3ebe796d809ae1acaf6b5f0ea6c984

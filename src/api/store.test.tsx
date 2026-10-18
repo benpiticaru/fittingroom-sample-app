@@ -10,7 +10,7 @@ import { createConfigStore } from "@fitting-room/adapter-msw";
 import { ConfigProvider } from "../features/jobs/ConfigProvider";
 import { JobsTable } from "../features/jobs/JobsTable";
 import { jobFixtures } from "../fixtures/dispatcher";
-import { muslinConfig } from "./muslin";
+import { muslinConfig } from "../muslin/config";
 import type { TableConfig } from "./types";
 import "../index.css";
 

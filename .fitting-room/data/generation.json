@@ -1,0 +1,44 @@
+{
+  "runs": [
+    {
+      "at": "2026-10-17T13:40:54.027Z",
+      "provider": "claude",
+      "seed": 390309489,
+      "rows": 25,
+      "schemaDigest": "sha256:941fac208d6de280d790e405dfadee7b6e3a7a84dbbb97112f513c0f27cc0c61",
+      "personas": [
+        "supervisor"
+      ],
+      "endpoints": [
+        "jobs"
+      ],
+      "mechanicalFields": [],
+      "model": "claude-sonnet-5-5"
+    },
+    {
+      "at": "2026-10-17T14:39:37.398Z",
+      "provider": "claude",
+      "seed": 1,
+      "rows": 2,
+      "schemaDigest": "sha256:941fac208d6de280d790e405dfadee7b6e3a7a84dbbb97112f513c0f27cc0c61",
+      "personas": [
+        "planner"
+      ],
+      "endpoints": [
+        "jobs"
+      ],
+      "mechanicalFields": [],
+      "model": "claude-sonnet-5-5"
+    }
+  ],
+  "approvals": {
+    "supervisor": {
+      "approvedAt": "2026-10-17T14:38:28.004Z",
+      "digest": "sha256:c03ac219def592d1dc27a33f354b15e23a7e827222b63aa0a895a9c44fa91f43"
+    },
+    "planner": {
+      "approvedAt": "2026-10-17T14:39:52.377Z",
+      "digest": "sha256:d7a3dda61e029e089fac6e58d228c841fce85e6a71c5fa11a1e597f4739aa980"
+    }
+  }
+}

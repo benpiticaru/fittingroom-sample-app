@@ -1,5 +1,5 @@
 {
-  "id": "fit-muymp63u",
+  "id": "fit-019a0c3e5f2a0b7c",
   "muslinBuild": "unknown",
   "app": {
     "name": "sample-dispatch",
@@ -13,6 +13,7 @@
     "role": "dispatch supervisor"
   },
   "startedAt": "2026-10-07T21:37:36.042Z",
+  "submittedAt": "2026-10-07T21:37:36.340Z",
   "pins": [
     {
       "id": "pin-1",
@@ -42,7 +43,16 @@
           "slaHoursRemaining"
         ],
         "file": "src/features/jobs/tableConfig.json"
-      }
+      },
+      "context": {
+        "route": "(cli)",
+        "persona": "dispatch supervisor",
+        "fixtures": [
+          "SYN-JOB-4120",
+          "SYN-JOB-4121"
+        ]
+      },
+      "live": true
     },
     {
       "id": "pin-2",
@@ -50,7 +60,17 @@
       "utterance": "Flag any job with a part on backorder so I can chase it.",
       "kind": "display-rule",
       "scope": "frontend",
-      "summary": "Jobs with a backordered part are flagged in the worklist"
+      "summary": "Jobs with a backordered part are flagged in the worklist",
+      "context": {
+        "route": "(cli)",
+        "persona": "dispatch supervisor",
+        "fixtures": [
+          "SYN-JOB-4120",
+          "SYN-JOB-4121"
+        ]
+      },
+      "live": false,
+      "notLiveReason": "needs code"
     },
     {
       "id": "pin-3",
@@ -61,7 +81,16 @@
       "summary": "Warranty status column (not in data today)",
       "impliedField": {
         "name": "warrantyStatus"
-      }
+      },
+      "context": {
+        "route": "(cli)",
+        "persona": "dispatch supervisor",
+        "fixtures": [
+          "SYN-JOB-4120",
+          "SYN-JOB-4121"
+        ]
+      },
+      "live": true
     }
   ],
   "transcript": [
@@ -86,7 +115,7 @@
   ],
   "attempt": {
     "outcome": "stopped",
-    "branch": "fitting/fit-muymp63u",
+    "branch": "fitting/fit-019a0c3e5f2a0b7c",
     "appliedPinIds": [
       "pin-1",
       "pin-2"

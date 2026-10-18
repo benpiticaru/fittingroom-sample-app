@@ -1,0 +1,74 @@
+# The sample app's Fitting Room demo: both images are built here, locally (FR-35).
+# Run: REV=$(git rev-parse HEAD) docker compose up --build   (Podman: podman compose up)
+services:
+  app:
+    image: fittingroom-sample-app-muslin:local
+    build:
+      context: .
+      dockerfile: muslin.Dockerfile
+      args:
+        REV: ${REV:-}
+    pull_policy: build
+    networks:
+      - muslin
+    healthcheck:
+      test:
+        - CMD
+        - wget
+        - -q
+        - -O
+        - /dev/null
+        - http://127.0.0.1/__fittingroom/manifest.json
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  fittingroom:
+    image: fittingroom-demo:local
+    build:
+      context: .
+      dockerfile: fittingroom.Dockerfile
+      args:
+        REV: ${REV:-}
+    pull_policy: build
+    working_dir: /repo
+    command:
+      - fit
+      - serve
+      - --proxy
+      - http://app:80
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8080"
+    environment:
+      FR_SRC: /src
+      FR_REPO: /repo
+      FR_MODE: branch-local
+      FR_PUBLIC_URL: http://127.0.0.1:8080
+      # FR_BASE_BRANCH: main
+    volumes:
+      - .:/src:ro
+      - fitting-repo:/repo
+    # Loopback only. Changing this line exposes the fitting to the network.
+    ports:
+      - "127.0.0.1:8080:8080"
+    networks:
+      - muslin
+      - default
+    depends_on:
+      app:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:8080/index.html',{headers:{Accept:'text/html'}}).then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"
+      interval: 5s
+      timeout: 5s
+      retries: 10
+networks:
+  muslin:
+    internal: true
+volumes:
+  fitting-repo: {}

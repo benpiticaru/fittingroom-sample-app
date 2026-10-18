@@ -1,0 +1,14 @@
+{
+  "data": {
+    "role": "planner",
+    "handle": "SYN-USER-1",
+    "displayName": "Brook SYN-Marrow"
+  },
+  "meta": {
+    "edges": [
+      "generated"
+    ],
+    "synthetic": true,
+    "source": "generated"
+  }
+}

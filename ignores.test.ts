@@ -10,11 +10,12 @@
 // .gitignore files decide, never .git/info/exclude or a global excludesFile.
 import { afterAll, describe, expect, it } from "vitest";
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdtempSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
+import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { disableAutoMaintenanceSync, tempDirs } from "@fitting-room/agent/testing";
 import type { UserConfigFnObject } from "vite";
+import { MUSLIN_DEFAULT_OUT } from "@fitting-room/cli";
 import viteConfig from "./vite.config";
 
 const appDir = fileURLToPath(new URL(".", import.meta.url));
@@ -25,9 +26,11 @@ const APP = standalone ? "" : "examples/sample-app/";
 const S = `${APP}.fitting-room/sessions`;
 
 const cleanEnv = () => Object.fromEntries(Object.entries(process.env).filter(([k]) => !k.startsWith("GIT_")));
-const scratch = mkdtempSync(join(tmpdir(), "fittingroom-ignores-"));
-afterAll(() => rmSync(scratch, { recursive: true, force: true }));
+const temp = tempDirs();
+const scratch = temp.makeSync("fittingroom-ignores-");
+afterAll(() => temp.cleanupSync());
 spawnSync("git", ["init", "-q", scratch], { env: cleanEnv(), encoding: "utf8" });
+disableAutoMaintenanceSync(scratch, cleanEnv());
 
 /** git check-ignore --no-index: 0 = ignored, 1 = not ignored, anything else is a failure. */
 function ignored(rel: string): boolean {
@@ -72,19 +75,13 @@ describe.skipIf(standalone)("ESLint ignores", () => {
   }, 30_000);
 });
 
-describe("vite outDir", () => {
-  const outDirFor = (flag: string) => {
-    const prev = process.env.VITE_FITTINGROOM;
-    process.env.VITE_FITTINGROOM = flag;
-    try {
-      const cfg = (viteConfig as UserConfigFnObject)({ command: "build", mode: "production" });
-      return cfg.build?.outDir;
-    } finally {
-      if (prev === undefined) delete process.env.VITE_FITTINGROOM;
-      else process.env.VITE_FITTINGROOM = prev;
-    }
-  };
+describe("muslin output directory", () => {
+  it("is the cli's default, dist-muslin, which the ignore rules above cover", () => {
+    expect(MUSLIN_DEFAULT_OUT).toBe("dist-muslin");
+  });
 
-  it("writes the muslin build to dist-muslin", () => expect(outDirFor("1")).toBe("dist-muslin"));
-  it("leaves the production outDir at Vite's default", () => expect(outDirFor("0")).toBeUndefined());
+  it.each(["build", "serve"] as const)("the vite config (%s) sets no outDir, so neither build overrides the cli's default or Vite's dist", (command) => {
+    const cfg = (viteConfig as UserConfigFnObject)({ command, mode: "production" });
+    expect(cfg.build?.outDir).toBeUndefined();
+  });
 });
